@@ -4,21 +4,84 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% if title %}{{ title }} — {% endif %}A WTF Kind of Day</title>
-  <meta name="description" content="{{ description or 'A humor-driven publication for modern adults navigating daily chaos' }}">
+  <meta name="description" content="{{ description or 'A humor-driven publication for modern adults navigating daily chaos — workplace nonsense, relationship confusion, petty offenses, and minor disasters. With dry wit and minimal patience.' }}">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/styles.css">
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
 
-{% include "components/nav.njk" %}
+<nav>
+  <a href="/" class="nav-logo">
+    A WTF Kind of Day
+    <span>Humor · Chaos · Validation</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/#categories">Categories</a></li>
+    <li><a href="/posts">Read</a></li>
+    <li><a href="/#about">About</a></li>
+    <li><a href="/#newsletter">Newsletter</a></li>
+    <li><a href="/#merch" class="nav-cta">Shop</a></li>
+  </ul>
+  <button class="nav-hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
 
 {{ content | safe }}
 
-{% include "components/footer.njk" %}
+<footer>
+  <div class="footer-main">
+    <div class="footer-col">
+      <span class="footer-logo">A WTF Kind of Day</span>
+      <p class="footer-tagline">A humor-driven publication for modern adults navigating daily chaos. No advice. Just solidarity and dry wit.</p>
+      <div class="footer-socials">
+        <a href="#" class="footer-social">Tw</a>
+        <a href="#" class="footer-social">Ig</a>
+        <a href="#" class="footer-social">Tk</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Categories</div>
+      <ul class="footer-links">
+        <li><a href="/categories/work-wtfs">Work WTFs</a></li>
+        <li><a href="/categories/life-relationships">Life &amp; Relationships</a></li>
+        <li><a href="/categories/everyday-disasters">Everyday Disasters</a></li>
+        <li><a href="/categories/petty-offenses">Petty Offenses</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">The Publication</div>
+      <ul class="footer-links">
+        <li><a href="/#about">About</a></li>
+        <li><a href="/posts">Archive</a></li>
+        <li><a href="/#newsletter">Newsletter</a></li>
+        <li><a href="/submit">Submit a WTF</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">The Shop</div>
+      <ul class="footer-links">
+        <li><a href="/#merch">All Products</a></li>
+        <li><a href="/#merch">New Arrivals</a></li>
+        <li><a href="/#merch">Best Sellers</a></li>
+        <li><a href="/#merch">Limited Drops</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 A WTF Kind of Day. All chaos documented.</span>
+    <ul class="footer-bottom-links">
+      <li><a href="#">Privacy</a></li>
+      <li><a href="#">Terms</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+</footer>
 
 <script src="/js/main.js"></script>
 <script>
+  // Netlify Identity
   if (window.netlifyIdentity) {
     window.netlifyIdentity.on("init", user => {
       if (!user) {
@@ -28,6 +91,15 @@
       }
     });
   }
+  // Fade-up animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
