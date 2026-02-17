@@ -50,7 +50,7 @@ layout: layouts/base.njk
   </div>
   {% endif %}
 
-  <!-- Validate -->
+  <!-- Share & Validate -->
   <div class="post-actions">
     <div class="post-actions-inner">
       <button class="post-validate-btn" onclick="validatePost(this)">
@@ -59,6 +59,11 @@ layout: layouts/base.njk
         </svg>
         <span class="validate-text">I Feel This</span>
       </button>
+      <div class="post-share">
+        <span class="post-share-label">Share:</span>
+        <a href="https://twitter.com/intent/tweet?url={{ page.url | url | absoluteUrl(metadata.url) }}&text={{ title }}" class="post-share-btn" target="_blank" rel="noopener">Twitter</a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.url | url | absoluteUrl(metadata.url) }}" class="post-share-btn" target="_blank" rel="noopener">Facebook</a>
+      </div>
     </div>
   </div>
 
@@ -261,8 +266,10 @@ layout: layouts/base.njk
   margin: 0 auto;
   padding: 0 5%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
 }
 
 .post-validate-btn {
@@ -291,6 +298,36 @@ layout: layouts/base.njk
   background: var(--accent);
   border-color: var(--accent);
   color: var(--white);
+}
+
+.post-share {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.post-share-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--gray-400);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.post-share-btn {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--black);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--gray-200);
+  transition: all 0.2s;
+}
+
+.post-share-btn:hover {
+  background: var(--black);
+  color: var(--white);
+  border-color: var(--black);
 }
 
 .post-more {
@@ -359,6 +396,11 @@ layout: layouts/base.njk
 @media (max-width: 768px) {
   .post-page-title {
     font-size: 2.5rem;
+  }
+  
+  .post-actions-inner {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 </style>
