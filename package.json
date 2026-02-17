@@ -1,0 +1,16 @@
+{
+  "name": "wtf-kind-of-day",
+  "version": "1.0.0",
+  "description": "A WTF Kind of Day - Editorial platform with e-commerce",
+  "scripts": {
+    "start": "eleventy --serve",
+    "build": "eleventy"
+  },
+  "keywords": ["blog", "humor", "editorial"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1"
+  },
+  "dependencies": {}
+}
