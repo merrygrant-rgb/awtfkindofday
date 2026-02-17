@@ -1,14 +1,418 @@
-{# _includes/layouts/post.njk #}
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{{ title }}</title>
-  </head>
-  <body>
-    <main>
+---
+layout: layouts/base.njk
+---
+
+<article class="post-page">
+  
+  <!-- Post Header -->
+  <header class="post-header">
+    <div class="post-header-inner">
+      <a href="/#categories" class="post-category-tag">{{ category }}</a>
+      <h1 class="post-page-title">{{ title }}</h1>
+      <p class="post-page-teaser">{{ teaser }}</p>
+      <div class="post-meta-row">
+        <span class="post-meta-item">{{ date | readableDate }}</span>
+        <span class="post-meta-separator">·</span>
+        <span class="post-meta-item">{{ read_time or '5' }} min read</span>
+        {% if tags %}
+        <span class="post-meta-separator">·</span>
+        <span class="post-meta-item">{{ tags | join(", ") }}</span>
+        {% endif %}
+        {% if validation_count %}
+        <span class="post-meta-separator">·</span>
+        <span class="post-meta-item">{{ validation_count }} people validated this</span>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+
+  <!-- Featured Image -->
+  {% if image %}
+  <div class="post-featured-image">
+    <img src="{{ image }}" alt="{{ title }}">
+  </div>
+  {% endif %}
+
+  <!-- Post Content -->
+  <div class="post-content">
+    <div class="post-content-inner">
       {{ content | safe }}
-    </main>
-  </body>
-</html>
+    </div>
+  </div>
+
+  <!-- Related Merch CTA -->
+  {% if related_merch %}
+  <div class="post-merch-cta">
+    <div class="post-merch-cta-inner">
+      <p class="post-merch-cta-label">This sentiment also available on merchandise</p>
+      <a href="/#merch" class="btn btn-secondary">View in Shop →</a>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Share & Validate -->
+  <div class="post-actions">
+    <div class="post-actions-inner">
+      <button class="post-validate-btn" onclick="validatePost(this)">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M10 2L12.5 7L18 8L14 12L15 18L10 15L5 18L6 12L2 8L7.5 7L10 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+        </svg>
+        <span class="validate-text">I Feel This</span>
+      </button>
+      <div class="post-share">
+        <span class="post-share-label">Share:</span>
+        <a href="https://twitter.com/intent/tweet?url={{ page.url | url | absoluteUrl(metadata.url) }}&text={{ title }}" class="post-share-btn" target="_blank" rel="noopener">Twitter</a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.url | url | absoluteUrl(metadata.url) }}" class="post-share-btn" target="_blank" rel="noopener">Facebook</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- More Posts -->
+  <div class="post-more">
+    <div class="post-more-header">
+      <h2>More WTFs</h2>
+    </div>
+    <div class="post-more-grid">
+      {% set relatedPosts = collections.posts | where("data.category", category) | limit(3) %}
+      {% for post in relatedPosts %}
+        {% if post.url != page.url %}
+        <a href="{{ post.url }}" class="post-more-card">
+          <span class="post-more-card-category">{{ post.data.category }}</span>
+          <h3 class="post-more-card-title">{{ post.data.title }}</h3>
+          <span class="post-more-card-meta">{{ post.date | readableDate }} · {{ post.data.read_time or '5' }} min</span>
+        </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+    <a href="/#featured" class="btn btn-primary" style="margin-top:2rem;">Back to All Posts →</a>
+  </div>
+
+</article>
+
+<style>
+/* Post Page Styles */
+.post-page {
+  padding-top: 68px;
+  min-height: 100vh;
+}
+
+.post-header {
+  background: var(--white);
+  border-bottom: 1.5px solid var(--black);
+  padding: 5rem 0 4rem;
+}
+
+.post-header-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 5%;
+}
+
+.post-category-tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+  transition: opacity 0.2s;
+}
+
+.post-category-tag:hover {
+  opacity: 0.7;
+}
+
+.post-page-title {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  color: var(--black);
+}
+
+.post-page-teaser {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: var(--gray-600);
+  margin-bottom: 2rem;
+}
+
+.post-meta-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--gray-400);
+}
+
+.post-meta-item {
+  font-weight: 600;
+}
+
+.post-meta-separator {
+  color: var(--gray-200);
+}
+
+.post-featured-image {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 5% 0;
+}
+
+.post-featured-image img {
+  width: 100%;
+  height: auto;
+  border: 1.5px solid var(--black);
+}
+
+.post-content {
+  background: var(--white);
+  padding: 4rem 0;
+}
+
+.post-content-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 5%;
+}
+
+.post-content-inner h2 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 3rem 0 1.5rem;
+  color: var(--black);
+}
+
+.post-content-inner h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 2.5rem 0 1rem;
+}
+
+.post-content-inner p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  color: var(--black);
+}
+
+.post-content-inner blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: 2rem;
+  margin: 2.5rem 0;
+  font-style: italic;
+  color: var(--gray-600);
+  font-size: 1.15rem;
+}
+
+.post-content-inner ul,
+.post-content-inner ol {
+  margin: 1.5rem 0;
+  padding-left: 2rem;
+}
+
+.post-content-inner li {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 0.75rem;
+}
+
+.post-content-inner strong {
+  font-weight: 700;
+  color: var(--black);
+}
+
+.post-content-inner em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.post-merch-cta {
+  background: var(--accent-light);
+  border-top: 1.5px solid var(--black);
+  border-bottom: 1.5px solid var(--black);
+  padding: 3rem 0;
+}
+
+.post-merch-cta-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 5%;
+  text-align: center;
+}
+
+.post-merch-cta-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gray-600);
+  margin-bottom: 1.5rem;
+}
+
+.post-actions {
+  background: var(--white);
+  padding: 3rem 0;
+  border-bottom: 1.5px solid var(--black);
+}
+
+.post-actions-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.post-validate-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1.75rem;
+  background: var(--white);
+  border: 1.5px solid var(--black);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--black);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.post-validate-btn:hover {
+  background: var(--black);
+  color: var(--white);
+}
+
+.post-validate-btn.validated {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--white);
+}
+
+.post-share {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.post-share-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--gray-400);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.post-share-btn {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--black);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--gray-200);
+  transition: all 0.2s;
+}
+
+.post-share-btn:hover {
+  background: var(--black);
+  color: var(--white);
+  border-color: var(--black);
+}
+
+.post-more {
+  background: var(--gray-100);
+  padding: 5rem 0;
+}
+
+.post-more-header {
+  max-width: 1200px;
+  margin: 0 auto 3rem;
+  padding: 0 5%;
+}
+
+.post-more-header h2 {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 900;
+}
+
+.post-more-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 5%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.post-more-card {
+  background: var(--white);
+  border: 1.5px solid var(--black);
+  padding: 2rem;
+  text-decoration: none;
+  transition: transform 0.2s;
+}
+
+.post-more-card:hover {
+  transform: translateY(-4px);
+}
+
+.post-more-card-category {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.post-more-card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--black);
+  margin-bottom: 1rem;
+}
+
+.post-more-card-meta {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--gray-400);
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .post-page-title {
+    font-size: 2.5rem;
+  }
+  
+  .post-actions-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+</style>
+
+<script>
+function validatePost(btn) {
+  if (btn.classList.contains('validated')) {
+    btn.classList.remove('validated');
+    btn.querySelector('.validate-text').textContent = 'I Feel This';
+  } else {
+    btn.classList.add('validated');
+    btn.querySelector('.validate-text').textContent = '✓ Validated';
+  }
+}
+</script>
