@@ -3,17 +3,466 @@ layout: layouts/base.njk
 permalink: /
 ---
 
-<div style="padding: 4rem; text-align: center; max-width: 800px; margin: 0 auto; font-family: sans-serif;">
-  <h1 style="font-size: 3rem; margin-bottom: 1rem;">A WTF Kind of Day</h1>
-  <p style="font-size: 1.5rem; color: #666; margin-bottom: 2rem;">
-    Your CMS is successfully deployed!
-  </p>
-  <p style="font-size: 1.2rem; margin-bottom: 1rem;">
-    <strong>Next step:</strong> Go to <code style="background: #f4f4f4; padding: 0.5rem; border-radius: 4px;">/admin</code> to start adding content
-  </p>
-  <hr style="margin: 3rem 0; border: none; border-top: 1px solid #ddd;">
-  <p style="color: #999; font-size: 0.9rem;">
-    Once you add blog posts and customize settings in the admin panel,<br>
-    your full site design will appear here automatically.
-  </p>
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Est. 2025 · The Chaos Dispatch</div>
+    <h1 class="hero-headline">
+      Some Days Make You Question the <em>Simulation.</em>
+    </h1>
+    <p class="hero-sub">A humor-forward space for modern adults surviving work, relationships, minor disasters, and socially questionable behavior. No advice. Just solidarity.</p>
+    <div class="hero-buttons">
+      <a href="#featured" class="btn btn-primary">Read Today's WTF →</a>
+      <a href="#merch" class="btn btn-secondary">Shop the Chaos</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <span class="hero-stat-num">{{ collections.posts | length or '247' }}</span>
+        <span class="hero-stat-label">WTFs Documented</span>
+      </div>
+      <div>
+        <span class="hero-stat-num">14k</span>
+        <span class="hero-stat-label">Emotionally Validated</span>
+      </div>
+      <div>
+        <span class="hero-stat-num">∞</span>
+        <span class="hero-stat-label">Spreadsheets Judged</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-art">
+      <svg viewBox="0 0 360 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="350" width="320" height="30" fill="#f4f4f4"/>
+        <line x1="20" y1="350" x2="340" y2="350" stroke="#0a0a0a" stroke-width="1.5"/>
+        <g transform="rotate(-2 180 200)">
+          <rect x="60" y="40" width="240" height="280" rx="2" fill="#fafafa" stroke="#0a0a0a" stroke-width="2"/>
+          <circle cx="100" cy="50" r="5" fill="none" stroke="#0a0a0a" stroke-width="1.5"/>
+          <circle cx="140" cy="50" r="5" fill="none" stroke="#0a0a0a" stroke-width="1.5"/>
+          <circle cx="180" cy="50" r="5" fill="none" stroke="#0a0a0a" stroke-width="1.5"/>
+          <circle cx="220" cy="50" r="5" fill="none" stroke="#0a0a0a" stroke-width="1.5"/>
+          <circle cx="260" cy="50" r="5" fill="none" stroke="#0a0a0a" stroke-width="1.5"/>
+          <rect x="60" y="65" width="240" height="35" fill="#0a0a0a"/>
+          <line x1="85" y1="82" x2="175" y2="82" stroke="#fafafa" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="60" y1="120" x2="300" y2="120" stroke="#0a0a0a" stroke-width="1"/>
+          <line x1="94" y1="100" x2="94" y2="320" stroke="#0a0a0a" stroke-width="1"/>
+          <line x1="128" y1="100" x2="128" y2="320" stroke="#0a0a0a" stroke-width="1"/>
+          <line x1="162" y1="100" x2="162" y2="320" stroke="#0a0a0a" stroke-width="1"/>
+          <line x1="196" y1="100" x2="196" y2="320" stroke="#0a0a0a" stroke-width="1"/>
+          <line x1="230" y1="100" x2="230" y2="320" stroke="#0a0a0a" stroke-width="1"/>
+          <line x1="264" y1="100" x2="264" y2="320" stroke="#0a0a0a" stroke-width="1"/>
+          <line x1="60" y1="145" x2="300" y2="145" stroke="#0a0a0a" stroke-width="1"/>
+          <line x1="60" y1="180" x2="300" y2="180" stroke="#0a0a0a" stroke-width="1"/>
+          <line x1="60" y1="215" x2="300" y2="215" stroke="#0a0a0a" stroke-width="1"/>
+          <line x1="60" y1="250" x2="300" y2="250" stroke="#0a0a0a" stroke-width="1"/>
+          <line x1="60" y1="285" x2="300" y2="285" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="75" y="115" font-family="Montserrat, sans-serif" font-size="11" font-weight="700" fill="#0a0a0a">M</text>
+          <text x="108" y="115" font-family="Montserrat, sans-serif" font-size="11" font-weight="700" fill="#0a0a0a">T</text>
+          <text x="143" y="115" font-family="Montserrat, sans-serif" font-size="11" font-weight="700" fill="#0a0a0a">W</text>
+          <text x="176" y="115" font-family="Montserrat, sans-serif" font-size="11" font-weight="700" fill="#0a0a0a">T</text>
+          <text x="213" y="115" font-family="Montserrat, sans-serif" font-size="11" font-weight="700" fill="#0a0a0a">F</text>
+          <text x="245" y="115" font-family="Montserrat, sans-serif" font-size="11" font-weight="700" fill="#0a0a0a">S</text>
+          <text x="278" y="115" font-family="Montserrat, sans-serif" font-size="11" font-weight="700" fill="#0a0a0a">S</text>
+          <text x="74" y="138" font-family="Montserrat, sans-serif" font-size="10" font-weight="600" fill="#999">1</text>
+          <text x="107" y="138" font-family="Montserrat, sans-serif" font-size="10" font-weight="600" fill="#999">2</text>
+          <text x="141" y="138" font-family="Montserrat, sans-serif" font-size="10" font-weight="600" fill="#999">3</text>
+          <text x="74" y="173" font-family="Montserrat, sans-serif" font-size="10" font-weight="600" fill="#0a0a0a">8</text>
+          <text x="107" y="173" font-family="Montserrat, sans-serif" font-size="10" font-weight="600" fill="#0a0a0a">9</text>
+          <rect x="130" y="150" width="30" height="28" fill="#cc3333" opacity="0.15"/>
+          <text x="138" y="173" font-family="Montserrat, sans-serif" font-size="10" font-weight="900" fill="#cc3333">10</text>
+          <path d="M150,157 C150,154 151.5,152 152.5,150 C153,153 154,153.5 154.5,152 C154.5,155 156,156 155,158 C154,159.5 151,159.5 150,157Z" fill="#cc3333"/>
+          <circle cx="178" cy="165" r="12" fill="none" stroke="#cc3333" stroke-width="2" stroke-dasharray="2,2"/>
+          <text x="172" y="173" font-family="Montserrat, sans-serif" font-size="10" font-weight="900" fill="#cc3333">11</text>
+          <text x="166" y="182" font-family="Montserrat, sans-serif" font-size="5" font-weight="700" fill="#cc3333">OVERDUE</text>
+          <text x="74" y="208" font-family="Montserrat, sans-serif" font-size="10" font-weight="600" fill="#0a0a0a">15</text>
+          <text x="104" y="208" font-family="Montserrat, sans-serif" font-size="10" font-weight="600" fill="#999" opacity="0.4">16</text>
+          <line x1="100" y1="198" x2="118" y2="212" stroke="#0a0a0a" stroke-width="2"/>
+          <line x1="118" y1="198" x2="100" y2="212" stroke="#0a0a0a" stroke-width="2"/>
+          <rect x="130" y="185" width="30" height="28" fill="#c8a96e"/>
+          <text x="138" y="208" font-family="Montserrat, sans-serif" font-size="10" font-weight="900" fill="#0a0a0a">17</text>
+          <text x="134" y="197" font-family="Montserrat, sans-serif" font-size="5" font-weight="700" fill="#0a0a0a">TODAY</text>
+          <text x="172" y="208" font-family="Montserrat, sans-serif" font-size="10" font-weight="600" fill="#999">18</text>
+          <text x="206" y="208" font-family="Montserrat, sans-serif" font-size="10" font-weight="600" fill="#999">19</text>
+          <text x="74" y="243" font-family="Montserrat, sans-serif" font-size="10" font-weight="600" fill="#999">22</text>
+          <text x="104" y="243" font-family="Montserrat, sans-serif" font-size="10" font-weight="600" fill="#999">23</text>
+          <text x="138" y="243" font-family="Montserrat, sans-serif" font-size="10" font-weight="600" fill="#999">24</text>
+          <text x="74" y="278" font-family="Montserrat, sans-serif" font-size="10" font-weight="600" fill="#999">29</text>
+          <text x="104" y="278" font-family="Montserrat, sans-serif" font-size="10" font-weight="600" fill="#999">30</text>
+          <text x="138" y="278" font-family="Montserrat, sans-serif" font-size="10" font-weight="600" fill="#999">31</text>
+          <line x1="200" y1="195" x2="285" y2="195" stroke="#cc3333" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="1,2"/>
+          <line x1="200" y1="203" x2="270" y2="203" stroke="#cc3333" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="1,2"/>
+          <line x1="200" y1="211" x2="280" y2="211" stroke="#cc3333" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="1,2"/>
+          <text x="215" y="238" font-family="Georgia, serif" font-size="16" font-weight="700" fill="#cc3333">!</text>
+          <text x="248" y="235" font-family="Georgia, serif" font-size="13" font-weight="700" fill="#cc3333" opacity="0.6">!</text>
+          <text x="270" y="243" font-family="Georgia, serif" font-size="11" font-weight="700" fill="#cc3333" opacity="0.3">!</text>
+        </g>
+        <g transform="rotate(25 95 345)">
+          <ellipse cx="95" cy="362" rx="18" ry="6" fill="#c8a96e" opacity="0.3"/>
+          <rect x="80" y="345" width="30" height="35" rx="2" fill="#fafafa" stroke="#0a0a0a" stroke-width="1.5"/>
+          <path d="M110,355 Q118,355 118,362 Q118,369 110,369" stroke="#0a0a0a" stroke-width="1.5" fill="none"/>
+          <line x1="85" y1="350" x2="105" y2="350" stroke="#c8a96e" stroke-width="1.5"/>
+        </g>
+        <rect x="240" y="280" width="50" height="48" fill="#f5efe4" stroke="#0a0a0a" stroke-width="1.5" transform="rotate(-8 265 304)"/>
+        <line x1="248" y1="292" x2="280" y2="290" stroke="#0a0a0a" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+        <line x1="248" y1="300" x2="275" y2="298" stroke="#0a0a0a" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+        <rect x="252" y="265" width="50" height="48" fill="#fff5e6" stroke="#0a0a0a" stroke-width="1.5" transform="rotate(4 277 289)"/>
+        <line x1="260" y1="277" x2="292" y2="278" stroke="#0a0a0a" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+        <text x="310" y="110" font-family="Georgia, serif" font-size="22" font-weight="700" fill="#c8a96e" opacity="0.8">?</text>
+        <text x="325" y="95" font-family="Georgia, serif" font-size="16" font-weight="700" fill="#0a0a0a" opacity="0.3">?</text>
+        <rect x="300" y="360" width="28" height="28" fill="none" stroke="#c8a96e" stroke-width="1.5"/>
+        <rect x="294" y="366" width="28" height="28" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="hero-art-label">Schedule? More Like Crime Scene.</div>
+  </div>
+</section>
+
+<!-- ==================== TICKER ==================== -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-inner">
+    <div class="ticker-item">
+      <span>Workplace Nonsense</span><span class="ticker-dot"></span>
+      <span>Justified Irritation</span><span class="ticker-dot"></span>
+      <span>Relationship Confusion</span><span class="ticker-dot"></span>
+      <span>Minor Catastrophes</span><span class="ticker-dot"></span>
+      <span>Social Violations</span><span class="ticker-dot"></span>
+      <span>Corporate Survival</span><span class="ticker-dot"></span>
+      <span>Emotionally Validating Content</span><span class="ticker-dot"></span>
+      <span>Dry Wit Since 2025</span><span class="ticker-dot"></span>
+    </div>
+    <div class="ticker-item" aria-hidden="true">
+      <span>Workplace Nonsense</span><span class="ticker-dot"></span>
+      <span>Justified Irritation</span><span class="ticker-dot"></span>
+      <span>Relationship Confusion</span><span class="ticker-dot"></span>
+      <span>Minor Catastrophes</span><span class="ticker-dot"></span>
+      <span>Social Violations</span><span class="ticker-dot"></span>
+      <span>Corporate Survival</span><span class="ticker-dot"></span>
+      <span>Emotionally Validating Content</span><span class="ticker-dot"></span>
+      <span>Dry Wit Since 2025</span><span class="ticker-dot"></span>
+    </div>
+  </div>
 </div>
+
+<!-- ==================== CATEGORIES ==================== -->
+<section class="categories" id="categories">
+  <div class="categories-header fade-up">
+    <div>
+      <div class="section-label">Navigate the Chaos</div>
+      <h2 class="section-title">The WTF Files</h2>
+    </div>
+    <p class="categories-header-right">Four distinct flavors of daily suffering, neatly categorized for your reading convenience.</p>
+  </div>
+  <div class="categories-grid">
+    <a href="/categories/work-wtfs" class="cat-card fade-up">
+      <div class="cat-top">
+        <span class="cat-num">01 / 04</span>
+        <svg class="cat-icon" viewBox="0 0 48 48" fill="none"><rect x="6" y="10" width="36" height="28" rx="2" stroke-width="1.5"/><line x1="6" y1="18" x2="42" y2="18" stroke-width="1.5"/><line x1="16" y1="10" x2="16" y2="38" stroke-width="1.5"/><line x1="22" y1="24" x2="38" y2="24" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="29" x2="35" y2="29" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <h3 class="cat-title">Work WTFs</h3>
+        <p class="cat-desc">Corporate chaos. Professional nonsense. The peculiar theater of pretending a meeting couldn't have been an email. Daily survival in hostile spreadsheet territory.</p>
+      </div>
+      <div class="cat-bottom">
+        <span class="cat-count">{{ collections.posts | where("category","Work WTFs") | length or '89' }} Posts</span>
+        <div class="cat-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="2" y1="7" x2="12" y2="7" stroke-width="1.5" stroke-linecap="round"/><path d="M8 3.5L11.5 7L8 10.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </a>
+    <a href="/categories/life-relationships" class="cat-card fade-up fade-up-delay-1">
+      <div class="cat-top">
+        <span class="cat-num">02 / 04</span>
+        <svg class="cat-icon" viewBox="0 0 48 48" fill="none"><circle cx="18" cy="16" r="6" stroke-width="1.5"/><circle cx="30" cy="16" r="6" stroke-width="1.5"/><path d="M6 38c0-7 5.4-12 12-12" stroke-width="1.5" stroke-linecap="round"/><path d="M42 38c0-7-5.4-12-12-12" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <h3 class="cat-title">Life &amp; Relationships</h3>
+        <p class="cat-desc">Trying to connect with humans. Sometimes it works. Often it's confusing. Occasionally it's one of those situations you replay at 3am wondering what exactly happened.</p>
+      </div>
+      <div class="cat-bottom">
+        <span class="cat-count">{{ collections.posts | where("category","Life & Relationships") | length or '64' }} Posts</span>
+        <div class="cat-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="2" y1="7" x2="12" y2="7" stroke-width="1.5" stroke-linecap="round"/><path d="M8 3.5L11.5 7L8 10.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </a>
+    <a href="/categories/everyday-disasters" class="cat-card fade-up fade-up-delay-2">
+      <div class="cat-top">
+        <span class="cat-num">03 / 04</span>
+        <svg class="cat-icon" viewBox="0 0 48 48" fill="none"><polygon points="24,6 44,38 4,38" stroke-width="1.5" stroke-linejoin="round"/><line x1="24" y1="20" x2="24" y2="29" stroke-width="2" stroke-linecap="round"/><circle cx="24" cy="34" r="1.5" fill="currentColor"/></svg>
+        <h3 class="cat-title">Everyday Disasters</h3>
+        <p class="cat-desc">Small catastrophes. Big feelings. The specific agony of the parking situation, the spilled coffee, the locked keys, and the WiFi that chose today to develop a personality.</p>
+      </div>
+      <div class="cat-bottom">
+        <span class="cat-count">{{ collections.posts | where("category","Everyday Disasters") | length or '57' }} Posts</span>
+        <div class="cat-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="2" y1="7" x2="12" y2="7" stroke-width="1.5" stroke-linecap="round"/><path d="M8 3.5L11.5 7L8 10.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </a>
+    <a href="/categories/petty-offenses" class="cat-card fade-up fade-up-delay-3">
+      <div class="cat-top">
+        <span class="cat-num">04 / 04</span>
+        <svg class="cat-icon" viewBox="0 0 48 48" fill="none"><rect x="8" y="8" width="14" height="14" rx="1" stroke-width="1.5"/><rect x="26" y="8" width="14" height="14" rx="1" stroke-width="1.5"/><rect x="8" y="26" width="14" height="14" rx="1" stroke-width="1.5"/><rect x="26" y="26" width="14" height="14" rx="1" stroke-width="1.5"/></svg>
+        <h3 class="cat-title">Petty Offenses</h3>
+        <p class="cat-desc">Justifiable irritation at everyday nonsense. The cart in the middle of the aisle. The reply-all. The unsolicited opinion. We catalog them with scientific rigor and zero apology.</p>
+      </div>
+      <div class="cat-bottom">
+        <span class="cat-count">{{ collections.posts | where("category","Petty Offenses") | length or '37' }} Posts</span>
+        <div class="cat-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="2" y1="7" x2="12" y2="7" stroke-width="1.5" stroke-linecap="round"/><path d="M8 3.5L11.5 7L8 10.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ==================== FEATURED POSTS ==================== -->
+<section class="featured" id="featured">
+  <div class="featured-header fade-up">
+    <div>
+      <div class="section-label">Latest Dispatches</div>
+      <h2 class="section-title">Featured Posts</h2>
+    </div>
+    <a href="/posts" class="btn btn-secondary">View All Posts →</a>
+  </div>
+  <div class="posts-grid">
+    {% for post in collections.featuredPosts %}
+    <a href="{{ post.url }}" class="post-card fade-up">
+      <div class="post-img">
+        <div class="post-img-art">
+          {% if post.data.image %}
+          <img src="{{ post.data.image }}" alt="{{ post.data.title }}" style="width:100%;height:100%;object-fit:cover;">
+          {% else %}
+          <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:60%;opacity:0.3">
+            <rect x="20" y="20" width="160" height="120" rx="2" stroke="#0a0a0a" stroke-width="1.5"/>
+            <line x1="20" y1="50" x2="180" y2="50" stroke="#0a0a0a" stroke-width="1"/>
+            <line x1="60" y1="20" x2="60" y2="140" stroke="#0a0a0a" stroke-width="1"/>
+            <rect x="70" y="60" width="80" height="10" rx="1" fill="#c8a96e" opacity="0.5"/>
+            <rect x="70" y="78" width="100" height="8" rx="1" fill="#0a0a0a" opacity="0.2"/>
+            <rect x="70" y="94" width="90" height="8" rx="1" fill="#0a0a0a" opacity="0.2"/>
+          </svg>
+          {% endif %}
+        </div>
+        <span class="post-tag">{{ post.data.category }}</span>
+      </div>
+      <div class="post-body">
+        <h3 class="post-title">{{ post.data.title }}</h3>
+        <p class="post-teaser">{{ post.data.teaser }}</p>
+        <div class="post-footer">
+          <span class="post-meta">{{ post.date | readableDate }} · {{ post.data.read_time or '5' }} min read</span>
+          <span class="post-read-more">Read More</span>
+        </div>
+      </div>
+    </a>
+    {% else %}
+    <!-- Placeholder posts when no content yet -->
+    <a href="#" class="post-card fade-up">
+      <div class="post-img">
+        <div class="post-img-art">
+          <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:55%;opacity:0.25"><rect x="20" y="30" width="100" height="80" rx="2" stroke="#0a0a0a" stroke-width="1.5"/><rect x="30" y="44" width="60" height="8" rx="1" fill="#c8a96e"/><rect x="30" y="58" width="80" height="6" rx="1" fill="#0a0a0a" opacity="0.3"/><rect x="30" y="70" width="70" height="6" rx="1" fill="#0a0a0a" opacity="0.3"/><line x1="130" y1="50" x2="170" y2="50" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round"/><polyline points="168,47 171,50 168,53" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <span class="post-tag">Work WTFs</span>
+      </div>
+      <div class="post-body">
+        <h3 class="post-title">The 47-Minute Meeting That Was, In Fact, An Email</h3>
+        <p class="post-teaser">A real-time forensic analysis of how six adults with working calendars ended up in a conference room to discuss something that could have been resolved with three sentences and a reply-all.</p>
+        <div class="post-footer">
+          <span class="post-meta">Feb 12 · 6 min read</span>
+          <span class="post-read-more">Read More</span>
+        </div>
+      </div>
+    </a>
+    <a href="#" class="post-card fade-up fade-up-delay-1">
+      <div class="post-img">
+        <div class="post-img-art">
+          <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:45%;opacity:0.25"><circle cx="100" cy="70" r="40" stroke="#0a0a0a" stroke-width="1.5"/><line x1="100" y1="40" x2="100" y2="75" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round"/><line x1="100" y1="75" x2="118" y2="88" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round"/><text x="72" y="125" font-family="Montserrat,sans-serif" font-size="9" font-weight="700" fill="#0a0a0a" opacity="0.4">9:00 AM</text><text x="60" y="137" font-family="Montserrat,sans-serif" font-size="7" fill="#0a0a0a" opacity="0.3">ANOTHER MEETING</text></svg>
+        </div>
+        <span class="post-tag">Petty Offenses</span>
+      </div>
+      <div class="post-body">
+        <h3 class="post-title">Personal Space Is Not a Suggestion. It Is a Social Contract.</h3>
+        <p class="post-teaser">An investigation into why certain individuals at coffee shop counters, grocery checkout lines, and every elevator in existence operate on the assumption that 18 inches of buffer space is negotiable.</p>
+        <div class="post-footer">
+          <span class="post-meta">Feb 10 · 5 min read</span>
+          <span class="post-read-more">Read More</span>
+        </div>
+      </div>
+    </a>
+    <a href="#" class="post-card fade-up fade-up-delay-2">
+      <div class="post-img">
+        <div class="post-img-art">
+          <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:55%;opacity:0.25"><rect x="30" y="25" width="55" height="70" rx="2" stroke="#0a0a0a" stroke-width="1.5"/><rect x="34" y="35" width="12" height="12" rx="1" fill="#c8a96e" opacity="0.6"/><line x1="50" y1="40" x2="78" y2="40" stroke="#0a0a0a" stroke-width="1" stroke-linecap="round" opacity="0.4"/><line x1="34" y1="55" x2="78" y2="55" stroke="#0a0a0a" stroke-width="1" opacity="0.3"/><rect x="100" y="40" width="55" height="70" rx="2" stroke="#0a0a0a" stroke-width="1.5"/><rect x="104" y="50" width="12" height="12" rx="1" fill="#0a0a0a" opacity="0.7"/><text x="108" y="60" font-family="Montserrat,sans-serif" font-size="8" font-weight="700" fill="#fafafa">!</text></svg>
+        </div>
+        <span class="post-tag">Life &amp; Relationships</span>
+      </div>
+      <div class="post-body">
+        <h3 class="post-title">They Said "Let's Keep It Casual" And Then Sent a Paragraph</h3>
+        <p class="post-teaser">A careful textual analysis of the modern communication breakdown, in which the rules are invented, redefined, and quietly enforced by exactly one party who did not share the rulebook.</p>
+        <div class="post-footer">
+          <span class="post-meta">Feb 8 · 7 min read</span>
+          <span class="post-read-more">Read More</span>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- ==================== NEWSLETTER ==================== -->
+<section class="newsletter" id="newsletter">
+  <div class="newsletter-left fade-up">
+    <div class="newsletter-label">Weekly Dispatch</div>
+    <h2 class="newsletter-title">The Weekly <em>WTF</em></h2>
+    <p class="newsletter-desc">One story. One observation. One exhale of recognition. Every Saturday morning when you're trying to decompress from the previous five days. No spam. No motivational fluff. Just the good stuff.</p>
+    <div style="margin-top:2rem;">
+      <p style="font-size:0.85rem;color:rgba(255,255,255,0.5);margin-bottom:0.5rem;font-weight:700;letter-spacing:0.1em;">JOIN 14,000+ READERS WHO GET:</p>
+    </div>
+    <div class="newsletter-perks">
+      <div class="newsletter-perk"><span class="newsletter-perk-dot"></span>Weekly curated WTF stories from work, life, and the in-between</div>
+      <div class="newsletter-perk"><span class="newsletter-perk-dot"></span>Exclusive reader-submitted chaos, anonymized for your protection</div>
+      <div class="newsletter-perk"><span class="newsletter-perk-dot"></span>Early access to new merch drops and print releases</div>
+      <div class="newsletter-perk"><span class="newsletter-perk-dot"></span>Occasional polls to determine the worst social offense of the week</div>
+    </div>
+  </div>
+  <div class="newsletter-right fade-up fade-up-delay-1">
+    <form name="newsletter" method="POST" data-netlify="true" class="newsletter-form">
+      <div class="newsletter-field">
+        <label for="first-name">First Name</label>
+        <input type="text" id="first-name" name="first_name" placeholder="Your first name">
+      </div>
+      <div class="newsletter-field">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+      </div>
+      <button type="submit" class="newsletter-submit">Subscribe to the Chaos →</button>
+    </form>
+    <p class="newsletter-promise">One email per week. Unsubscribe whenever. No hard feelings. (There will be feelings. Just not at you.)</p>
+  </div>
+</section>
+
+<!-- ==================== QUOTE BANNER ==================== -->
+<div class="quote-banner fade-up">
+  <span class="quote-deco-l">"</span>
+  <blockquote class="quote-text">"Some days are a spreadsheet. Some days are a crime scene. Most days are both."</blockquote>
+  <p class="quote-attr">— A WTF Kind of Day · The Founding Observation</p>
+  <span class="quote-deco-r">"</span>
+</div>
+
+<!-- ==================== MERCH ==================== -->
+<section class="merch" id="merch">
+  <div class="merch-header">
+    <div>
+      <div class="section-label">The Shop</div>
+      <h2 class="section-title">Wear the Chaos</h2>
+    </div>
+    <p class="merch-header-right">Editorial objects for people who survived the week. Each item has an origin story. Most are therapy-adjacent.</p>
+  </div>
+  <div class="merch-grid">
+    {% for product in collections.merch %}
+    <div class="merch-card">
+      <div class="merch-img">
+        {% if product.data.badge %}<span class="merch-badge">{{ product.data.badge }}</span>{% endif %}
+        <div class="merch-product-art">
+          {% if product.data.images and product.data.images[0] %}
+          <img src="{{ product.data.images[0] }}" alt="{{ product.data.title }}" style="max-width:100%;max-height:100%;object-fit:contain;">
+          {% else %}
+          <svg viewBox="0 0 160 180" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:70%"><rect x="30" y="20" width="100" height="140" rx="4" stroke="currentColor" stroke-width="1.5" opacity="0.3"/><text x="80" y="100" font-family="Montserrat,sans-serif" font-size="11" font-weight="700" fill="currentColor" text-anchor="middle" opacity="0.4">{{ product.data.type }}</text></svg>
+          {% endif %}
+        </div>
+      </div>
+      <div class="merch-body">
+        <div class="merch-type">{{ product.data.type }}</div>
+        <div class="merch-name">{{ product.data.title }}</div>
+        <div class="merch-slogan">{{ product.data.slogan }}</div>
+        {% if product.data.origin_story and product.data.related_post %}
+        <div style="font-size:0.65rem;color:var(--accent);margin-bottom:0.8rem;font-weight:600;">
+          <a href="/posts/{{ product.data.related_post }}" style="color:var(--accent);text-decoration:none;">As seen in: {{ product.data.related_post | replace("-", " ") }} →</a>
+        </div>
+        {% endif %}
+        <div class="merch-price-row">
+          <span class="merch-price">${{ product.data.price }}</span>
+          <button class="merch-add">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <!-- Placeholder merch when no products added yet -->
+    <div class="merch-card">
+      <div class="merch-img">
+        <span class="merch-badge">Best Seller</span>
+        <div class="merch-product-art">
+          <svg viewBox="0 0 160 200" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:75%"><path d="M30 50 L50 30 L110 30 L130 50 L130 170 L30 170 Z" stroke="#0a0a0a" stroke-width="1.5" fill="#f4f4f4"/><path d="M50 30 Q80 45 110 30" stroke="#0a0a0a" stroke-width="1.5" fill="none"/><line x1="40" y1="80" x2="120" y2="80" stroke="#c8a96e" stroke-width="2" stroke-linecap="round"/><line x1="40" y1="95" x2="120" y2="95" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/><line x1="40" y1="108" x2="100" y2="108" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/></svg>
+        </div>
+      </div>
+      <div class="merch-body">
+        <div class="merch-type">Tee</div>
+        <div class="merch-name">Corporate Chaos Survivor</div>
+        <div class="merch-slogan">For those who made it to Friday</div>
+        <div class="merch-price-row"><span class="merch-price">$32</span><button class="merch-add">Add to Cart</button></div>
+      </div>
+    </div>
+    <div class="merch-card">
+      <div class="merch-img">
+        <div class="merch-product-art">
+          <svg viewBox="0 0 160 200" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:75%"><path d="M20 55 L20 170 L140 170 L140 55 L120 40 L40 40 Z" stroke="#0a0a0a" stroke-width="1.5" fill="#f0ebe2"/><path d="M20 55 L5 65 L5 120 L20 120" stroke="#0a0a0a" stroke-width="1.5" fill="none"/><path d="M140 55 L155 65 L155 120 L140 120" stroke="#0a0a0a" stroke-width="1.5" fill="none"/><line x1="45" y1="85" x2="115" y2="85" stroke="#c8a96e" stroke-width="2" stroke-linecap="round"/><line x1="45" y1="100" x2="115" y2="100" stroke="#0a0a0a" stroke-width="1" stroke-linecap="round" opacity="0.3"/><line x1="45" y1="113" x2="95" y2="113" stroke="#0a0a0a" stroke-width="1" stroke-linecap="round" opacity="0.3"/></svg>
+        </div>
+      </div>
+      <div class="merch-body">
+        <div class="merch-type">Hoodie</div>
+        <div class="merch-name">Facts Over Fury</div>
+        <div class="merch-slogan">Warm on the outside. Seething within.</div>
+        <div class="merch-price-row"><span class="merch-price">$68</span><button class="merch-add">Add to Cart</button></div>
+      </div>
+    </div>
+    <div class="merch-card">
+      <div class="merch-img">
+        <span class="merch-badge">New</span>
+        <div class="merch-product-art">
+          <svg viewBox="0 0 160 200" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:75%"><rect x="30" y="30" width="100" height="140" rx="2" stroke="#0a0a0a" stroke-width="1.5" fill="#fafafa"/><line x1="30" y1="65" x2="130" y2="65" stroke="#0a0a0a" stroke-width="1"/><text x="80" y="55" font-family="Montserrat,sans-serif" font-size="9" font-weight="900" fill="#0a0a0a" text-anchor="middle">SOME DAYS ARE A</text><line x1="45" y1="90" x2="115" y2="90" stroke="#c8a96e" stroke-width="2.5"/><line x1="45" y1="105" x2="115" y2="105" stroke="#0a0a0a" stroke-width="1.5" opacity="0.5"/><line x1="45" y1="118" x2="95" y2="118" stroke="#0a0a0a" stroke-width="1.5" opacity="0.5"/></svg>
+        </div>
+      </div>
+      <div class="merch-body">
+        <div class="merch-type">Print</div>
+        <div class="merch-name">Spreadsheet / Crime Scene</div>
+        <div class="merch-slogan">Office decor for the emotionally aware</div>
+        <div class="merch-price-row"><span class="merch-price">$18</span><button class="merch-add">Add to Cart</button></div>
+      </div>
+    </div>
+    <div class="merch-card">
+      <div class="merch-img">
+        <div class="merch-product-art">
+          <svg viewBox="0 0 160 200" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:75%"><rect x="25" y="50" width="110" height="90" rx="2" stroke="#0a0a0a" stroke-width="1.5" fill="#e8e8e8"/><path d="M55 140 L65 170 L95 170 L105 140" stroke="#0a0a0a" stroke-width="1.5" fill="none"/><line x1="50" y1="170" x2="110" y2="170" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round"/><ellipse cx="80" cy="95" rx="30" ry="25" stroke="#0a0a0a" stroke-width="1.5" fill="#fafafa"/><line x1="80" y1="78" x2="80" y2="92" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round"/><line x1="80" y1="92" x2="90" y2="98" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+      </div>
+      <div class="merch-body">
+        <div class="merch-type">Sticker Pack</div>
+        <div class="merch-name">Civic Chaos Pack</div>
+        <div class="merch-slogan">Peel. Stick. Validate feelings.</div>
+        <div class="merch-price-row"><span class="merch-price">$14</span><button class="merch-add">Add to Cart</button></div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- ==================== ABOUT ==================== -->
+<section class="about" id="about">
+  <div class="about-left fade-up">
+    <div class="section-label">Who We Are</div>
+    <h2 class="section-title">Built for People Who've Had Enough</h2>
+    <p class="about-body">
+      <strong>A WTF Kind of Day</strong> is a humor-driven publication for modern adults navigating daily chaos — workplace nonsense, relationship confusion, petty offenses, and minor disasters.
+      <br><br>
+      We don't offer advice. We don't suggest positive reframes. We document the chaos with dry wit and minimal patience, and let you feel validated by the fact that yes, this is actually happening.
+    </p>
+    <blockquote class="about-manifesto">"If it was absurd, we'll write about it. If it was relatable, someone already submitted it."</blockquote>
+    <a href="/posts" class="btn btn-primary" style="margin-top:2.5rem;display:inline-flex;">Browse the Archives →</a>
+  </div>
+  <div class="about-right fade-up fade-up-delay-1">
+    <div class="about-value">
+      <div class="about-value-title">Dry Wit Required</div>
+      <p class="about-value-text">We write for people who recognize absurdity when they see it and appreciate documentation over solutions.</p>
+    </div>
+    <div class="about-value">
+      <div class="about-value-title">Zero Toxic Positivity</div>
+      <p class="about-value-text">No silver linings unless they're sarcastic. No "lessons learned" unless the lesson is "people are exhausting."</p>
+    </div>
+    <div class="about-value">
+      <div class="about-value-title">Reader Submitted Chaos</div>
+      <p class="about-value-text">The best WTF moments come from you. All submissions are anonymized. All chaos is validated.</p>
+    </div>
+    <div class="about-value">
+      <div class="about-value-title">Commerce as Extension</div>
+      <p class="about-value-text">Every product has an origin story tied to a real post. Merch here is editorial, not inventory.</p>
+    </div>
+  </div>
+</section>
+
