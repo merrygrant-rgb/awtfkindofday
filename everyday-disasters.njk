@@ -1,0 +1,77 @@
+---
+layout: layouts/base.njk
+permalink: /categories/everyday-disasters/
+title: Everyday Disasters
+description: Small catastrophes. Big feelings. The specific agony of the parking situation.
+---
+
+<div class="category-page">
+  
+  <header class="category-header">
+    <div class="category-header-inner">
+      <div class="category-number">03 / 04</div>
+      <h1 class="category-title">Everyday Disasters</h1>
+      <p class="category-description">Small catastrophes. Big feelings. The specific agony of the parking situation, the spilled coffee, the locked keys, and the WiFi that chose today to develop a personality.</p>
+    </div>
+  </header>
+
+  <section class="category-posts">
+    <div class="category-posts-inner">
+      {% set categoryPosts = collections.posts | where("data.category", "Everyday Disasters") %}
+      
+      {% if categoryPosts.length > 0 %}
+        <div class="posts-grid">
+          {% for post in categoryPosts %}
+          <a href="{{ post.url }}" class="post-card">
+            <div class="post-img">
+              <div class="post-img-art">
+                {% if post.data.image %}
+                <img src="{{ post.data.image }}" alt="{{ post.data.title }}" style="width:100%;height:100%;object-fit:cover;">
+                {% else %}
+                <svg viewBox="0 0 200 160" fill="none" style="width:60%;opacity:0.3">
+                  <polygon points="100,40 140,120 60,120" stroke="#0a0a0a" stroke-width="1.5" fill="none"/>
+                  <line x1="100" y1="70" x2="100" y2="95" stroke="#0a0a0a" stroke-width="2"/>
+                  <circle cx="100" cy="110" r="3" fill="#0a0a0a"/>
+                </svg>
+                {% endif %}
+              </div>
+              <span class="post-tag">Everyday Disasters</span>
+            </div>
+            <div class="post-body">
+              <h3 class="post-title">{{ post.data.title }}</h3>
+              <p class="post-teaser">{{ post.data.teaser }}</p>
+              <div class="post-footer">
+                <span class="post-meta">{{ post.date | readableDate }} · {{ post.data.read_time or '5' }} min read</span>
+                <span class="post-read-more">Read More</span>
+              </div>
+            </div>
+          </a>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="category-empty">
+          <p>No posts in this category yet. Check back soon!</p>
+        </div>
+      {% endif %}
+    </div>
+  </section>
+
+  <div class="category-footer">
+    <a href="/#categories" class="btn btn-secondary">← Back to Categories</a>
+  </div>
+
+</div>
+
+<style>
+.category-page { padding-top: 68px; min-height: 100vh; }
+.category-header { background: var(--white); border-bottom: 1.5px solid var(--black); padding: 5rem 0 4rem; text-align: center; }
+.category-header-inner { max-width: 800px; margin: 0 auto; padding: 0 5%; }
+.category-number { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 1rem; }
+.category-title { font-family: var(--font-display); font-size: 4rem; font-weight: 900; margin-bottom: 1.5rem; color: var(--black); }
+.category-description { font-size: 1.25rem; line-height: 1.6; color: var(--gray-600); }
+.category-posts { background: var(--gray-100); padding: 5rem 0; }
+.category-posts-inner { max-width: 1400px; margin: 0 auto; padding: 0 5%; }
+.category-empty { text-align: center; padding: 5rem 0; color: var(--gray-400); font-size: 1.1rem; }
+.category-footer { background: var(--white); padding: 4rem 0; text-align: center; border-top: 1.5px solid var(--black); }
+@media (max-width: 768px) { .category-title { font-size: 2.5rem; } }
+</style>
