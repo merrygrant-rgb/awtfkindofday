@@ -437,16 +437,11 @@ permalink: /
   <div class="posts-grid">
     {% for post in collections.featuredPosts %}
     <a href="{{ post.url }}" class="post-card fade-up">
-      <div class="post-img">
+      <div class="post-header">
         <span class="post-tag">{{ post.data.category }}</span>
-        <div class="post-chaos-score">
-          <div class="post-chaos-label">Chaos Score</div>
-          <div class="post-chaos-meter">
-            <div class="post-chaos-bar">
-              <div class="post-chaos-fill" style="width: {{ (post.data.chaos_score or 7) * 10 }}%"></div>
-            </div>
-            <span class="post-chaos-number">{{ post.data.chaos_score or '7' }}/10</span>
-          </div>
+        <div class="post-chaos-badge">
+          <span style="font-size: 0.6rem; letter-spacing: 0.1em; opacity: 0.7;">CHAOS</span>
+          <span style="font-weight: 800;">{{ post.data.chaos_score or '7' }}/10</span>
         </div>
       </div>
       <div class="post-body">
@@ -461,16 +456,11 @@ permalink: /
     {% else %}
     <!-- Placeholder posts when no content yet -->
     <a href="#" class="post-card fade-up">
-      <div class="post-img">
+      <div class="post-header">
         <span class="post-tag">Work WTFs</span>
-        <div class="post-chaos-score">
-          <div class="post-chaos-label">Chaos Score</div>
-          <div class="post-chaos-meter">
-            <div class="post-chaos-bar">
-              <div class="post-chaos-fill" style="width: 80%"></div>
-            </div>
-            <span class="post-chaos-number">8/10</span>
-          </div>
+        <div class="post-chaos-badge">
+          <span style="font-size: 0.6rem; letter-spacing: 0.1em; opacity: 0.7;">CHAOS</span>
+          <span style="font-weight: 800;">8/10</span>
         </div>
       </div>
       <div class="post-body">
@@ -483,16 +473,11 @@ permalink: /
       </div>
     </a>
     <a href="#" class="post-card fade-up fade-up-delay-1">
-      <div class="post-img">
+      <div class="post-header">
         <span class="post-tag">Petty Offenses</span>
-        <div class="post-chaos-score">
-          <div class="post-chaos-label">Chaos Score</div>
-          <div class="post-chaos-meter">
-            <div class="post-chaos-bar">
-              <div class="post-chaos-fill" style="width: 60%"></div>
-            </div>
-            <span class="post-chaos-number">6/10</span>
-          </div>
+        <div class="post-chaos-badge">
+          <span style="font-size: 0.6rem; letter-spacing: 0.1em; opacity: 0.7;">CHAOS</span>
+          <span style="font-weight: 800;">6/10</span>
         </div>
       </div>
       <div class="post-body">
@@ -505,16 +490,11 @@ permalink: /
       </div>
     </a>
     <a href="#" class="post-card fade-up fade-up-delay-2">
-      <div class="post-img">
+      <div class="post-header">
         <span class="post-tag">Life &amp; Relationships</span>
-        <div class="post-chaos-score">
-          <div class="post-chaos-label">Chaos Score</div>
-          <div class="post-chaos-meter">
-            <div class="post-chaos-bar">
-              <div class="post-chaos-fill" style="width: 90%"></div>
-            </div>
-            <span class="post-chaos-number">9/10</span>
-          </div>
+        <div class="post-chaos-badge">
+          <span style="font-size: 0.6rem; letter-spacing: 0.1em; opacity: 0.7;">CHAOS</span>
+          <span style="font-weight: 800;">9/10</span>
         </div>
       </div>
       <div class="post-body">
@@ -530,38 +510,6 @@ permalink: /
   </div>
 </section>
 
-
-<!-- ==================== NEWSLETTER ==================== -->
-<section class="newsletter" id="newsletter">
-  <div class="newsletter-left fade-up">
-    <div class="newsletter-label">Weekly Dispatch</div>
-    <h2 class="newsletter-title">The Weekly <em>WTF</em></h2>
-    <p class="newsletter-desc">One story. One observation. One exhale of recognition. Every Saturday morning when you're trying to decompress from the previous five days. No spam. No motivational fluff. Just the good stuff.</p>
-    <div style="margin-top:2rem;">
-      <p style="font-size:0.85rem;color:rgba(255,255,255,0.5);margin-bottom:0.5rem;font-weight:700;letter-spacing:0.1em;">JOIN 14,000+ READERS WHO GET:</p>
-    </div>
-    <div class="newsletter-perks">
-      <div class="newsletter-perk"><span class="newsletter-perk-dot"></span>Weekly curated WTF stories from work, life, and the in-between</div>
-      <div class="newsletter-perk"><span class="newsletter-perk-dot"></span>Exclusive reader-submitted chaos, anonymized for your protection</div>
-      <div class="newsletter-perk"><span class="newsletter-perk-dot"></span>Early access to new merch drops and print releases</div>
-      <div class="newsletter-perk"><span class="newsletter-perk-dot"></span>Occasional polls to determine the worst social offense of the week</div>
-    </div>
-  </div>
-  <div class="newsletter-right fade-up fade-up-delay-1">
-    <form name="newsletter" method="POST" data-netlify="true" class="newsletter-form">
-      <div class="newsletter-field">
-        <label for="first-name">First Name</label>
-        <input type="text" id="first-name" name="first_name" placeholder="Your first name">
-      </div>
-      <div class="newsletter-field">
-        <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" placeholder="you@example.com" required>
-      </div>
-      <button type="submit" class="newsletter-submit">Subscribe to the Chaos →</button>
-    </form>
-    <p class="newsletter-promise">One email per week. Unsubscribe whenever. No hard feelings. (There will be feelings. Just not at you.)</p>
-  </div>
-</section>
 
 <!-- ==================== QUOTE BANNER ==================== -->
 <div class="quote-banner fade-up">
