@@ -1276,3 +1276,74 @@
   white-space: nowrap !important;
   flex-shrink: 0 !important;
 }
+
+/* ==================== FIX OVERLAP & POST OFFSET ==================== */
+
+/* Make post-header a proper flex container */
+.post-header {
+  padding: 1.5rem 2rem 1rem !important;
+  border-bottom: 1.5px solid #0a0a0a !important;
+  background: #f4f4f4 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 1rem !important;
+  flex-wrap: nowrap !important;
+}
+
+/* Category tag on LEFT */
+.post-tag {
+  font-size: 0.6rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase !important;
+  color: #0a0a0a !important;
+  background: transparent !important;
+  padding: 0 !important;
+  position: static !important;
+  flex-shrink: 0 !important;
+}
+
+/* Chaos badge on RIGHT */
+.post-chaos-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.4rem !important;
+  font-size: 0.7rem !important;
+  font-weight: 800 !important;
+  color: #0a0a0a !important;
+  background: #c8a96e !important;
+  padding: 0.4rem 0.9rem !important;
+  border: 1.5px solid #0a0a0a !important;
+  border-radius: 0 !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  position: static !important;
+  margin-left: auto !important;
+}
+
+/* Fix post page centering */
+.post-page {
+  padding-top: 68px !important;
+  min-height: 100vh !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+}
+
+.post-header-inner {
+  max-width: 900px !important;
+  margin: 0 auto !important;
+  padding: 5% 5% 3% !important;
+  text-align: center !important;
+}
+
+.post-content {
+  max-width: 900px !important;
+  margin: 0 auto !important;
+  padding: 3% 5% !important;
+}
+
+.post-content-inner {
+  max-width: 720px !important;
+  margin: 0 auto !important;
+}
