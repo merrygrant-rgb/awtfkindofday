@@ -1,17 +1,14 @@
 ---
 layout: layouts/base.njk
-permalink: /categories/life-relationships/
 title: Life & Relationships
-description: Trying to connect with humans. Sometimes it works. Often it's confusing.
 ---
 
-<div class="category-page">
-  
+<section class="category-page">
   <header class="category-header">
     <div class="category-header-inner">
-      <div class="category-number">02 / 04</div>
+      <span class="cat-num">02 / 04</span>
       <h1 class="category-title">Life & Relationships</h1>
-      <p class="category-description">Trying to connect with humans. Sometimes it works. Often it's confusing. Occasionally it's one of those situations you replay at 3am wondering what exactly happened.</p>
+      <p class="category-desc">Trying to connect with humans. Sometimes it works. Often it's confusing. Occasionally it's one of those situations you replay at 3am wondering what exactly happened.</p>
     </div>
   </header>
 
@@ -22,56 +19,231 @@ description: Trying to connect with humans. Sometimes it works. Often it's confu
       {% if categoryPosts.length > 0 %}
         <div class="posts-grid">
           {% for post in categoryPosts %}
-          <a href="{{ post.url }}" class="post-card">
-            <div class="post-img">
-              <div class="post-img-art">
-                {% if post.data.image %}
-                <img src="{{ post.data.image }}" alt="{{ post.data.title }}" style="width:100%;height:100%;object-fit:cover;">
-                {% else %}
-                <svg viewBox="0 0 200 160" fill="none" style="width:60%;opacity:0.3">
-                  <circle cx="70" cy="60" r="25" stroke="#0a0a0a" stroke-width="1.5"/>
-                  <circle cx="130" cy="60" r="25" stroke="#0a0a0a" stroke-width="1.5"/>
-                  <path d="M50 120c0-20 15-30 30-30M120 90c15 0 30 10 30 30" stroke="#0a0a0a" stroke-width="1.5"/>
-                </svg>
-                {% endif %}
-              </div>
-              <span class="post-tag">Life & Relationships</span>
-            </div>
-            <div class="post-body">
-              <h3 class="post-title">{{ post.data.title }}</h3>
-              <p class="post-teaser">{{ post.data.teaser }}</p>
-              <div class="post-footer">
-                <span class="post-meta">{{ post.date | readableDate }} · {{ post.data.read_time or '5' }} min read</span>
-                <span class="post-read-more">Read More</span>
-              </div>
-            </div>
-          </a>
+            <article class="post-card">
+              <a href="{{ post.url }}" class="post-card-link">
+                <div class="post-img">
+                  {% if post.data.image %}
+                    <img src="{{ post.data.image }}" alt="{{ post.data.title }}" class="post-img-img">
+                  {% else %}
+                    <div class="post-img-art">
+                      <svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                      </svg>
+                    </div>
+                  {% endif %}
+                  <span class="post-tag">Life & Relationships</span>
+                </div>
+                <div class="post-body">
+                  <h2 class="post-title">{{ post.data.title }}</h2>
+                  <p class="post-teaser">{{ post.data.teaser }}</p>
+                  <div class="post-footer">
+                    <span class="post-meta">{{ post.date | readableDate }} · {{ post.data.read_time or '5' }} min read</span>
+                    <span class="post-read-more">Read More →</span>
+                  </div>
+                </div>
+              </a>
+            </article>
           {% endfor %}
         </div>
       {% else %}
-        <div class="category-empty">
+        <div class="empty-state">
           <p>No posts in this category yet. Check back soon!</p>
         </div>
       {% endif %}
     </div>
   </section>
 
-  <div class="category-footer">
-    <a href="/#categories" class="btn btn-secondary">← Back to Categories</a>
+  <div class="category-back">
+    <a href="/" class="btn btn-secondary">← Back to Categories</a>
   </div>
-
-</div>
+</section>
 
 <style>
-.category-page { padding-top: 68px; min-height: 100vh; }
-.category-header { background: var(--white); border-bottom: 1.5px solid var(--black); padding: 5rem 0 4rem; text-align: center; }
-.category-header-inner { max-width: 800px; margin: 0 auto; padding: 0 5%; }
-.category-number { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 1rem; }
-.category-title { font-family: var(--font-display); font-size: 4rem; font-weight: 900; margin-bottom: 1.5rem; color: var(--black); }
-.category-description { font-size: 1.25rem; line-height: 1.6; color: var(--gray-600); }
-.category-posts { background: var(--gray-100); padding: 5rem 0; }
-.category-posts-inner { max-width: 1400px; margin: 0 auto; padding: 0 5%; }
-.category-empty { text-align: center; padding: 5rem 0; color: var(--gray-400); font-size: 1.1rem; }
-.category-footer { background: var(--white); padding: 4rem 0; text-align: center; border-top: 1.5px solid var(--black); }
-@media (max-width: 768px) { .category-title { font-size: 2.5rem; } }
+.category-page {
+  padding-top: 68px;
+  min-height: 100vh;
+}
+
+.category-header {
+  border-bottom: 1.5px solid var(--black);
+  background: var(--gray-100);
+}
+
+.category-header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5% 8% 4%;
+  text-align: center;
+}
+
+.cat-num {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: var(--gray-400);
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+.category-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+}
+
+.category-desc {
+  font-size: 1rem;
+  color: var(--gray-600);
+  line-height: 1.7;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.category-posts {
+  padding: 4% 8%;
+}
+
+.category-posts-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  border: 1.5px solid var(--black);
+}
+
+.post-card {
+  border-right: 1.5px solid var(--black);
+  border-bottom: 1.5px solid var(--black);
+}
+
+.post-card:nth-child(2n) {
+  border-right: none;
+}
+
+.post-card-link {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: var(--black);
+  height: 100%;
+}
+
+.post-img {
+  aspect-ratio: 16/9;
+  background: var(--gray-100);
+  border-bottom: 1.5px solid var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.post-img-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.post-img-art {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.post-img-art .cat-icon {
+  width: 48px;
+  height: 48px;
+  color: var(--gray-400);
+}
+
+.post-tag {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: var(--black);
+  color: var(--white);
+  padding: 0.35rem 0.75rem;
+}
+
+.post-body {
+  padding: 2rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 1rem;
+}
+
+.post-teaser {
+  font-size: 0.9rem;
+  color: var(--gray-600);
+  line-height: 1.6;
+  flex: 1;
+  margin-bottom: 1.5rem;
+}
+
+.post-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--gray-200);
+  padding-top: 1rem;
+}
+
+.post-meta {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+}
+
+.post-read-more {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--black);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 5rem;
+  color: var(--gray-600);
+}
+
+.category-back {
+  padding: 3% 8% 5%;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .posts-grid {
+    grid-template-columns: 1fr;
+  }
+  .post-card {
+    border-right: none;
+  }
+}
 </style>
