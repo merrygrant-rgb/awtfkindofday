@@ -683,6 +683,465 @@ permalink: /
     <div class="about-value">
       <div class="about-value-title">Commerce as Extension</div>
       <p class="about-value-text">Every product has an origin story tied to a real post. Merch here is editorial, not inventory.</p>
+<!-- ==================== SUBMIT WTF MODAL ==================== -->
+<div id="submit-modal" class="submit-modal">
+  <div class="submit-modal-overlay"></div>
+  <div class="submit-modal-content">
+    <button class="submit-modal-close" aria-label="Close">&times;</button>
+    
+    <div class="submit-modal-header">
+      <h2 class="submit-modal-title">Submit Your WTF</h2>
+      <p class="submit-modal-subtitle">Share your chaos. We document it with scientific rigor and zero judgment.</p>
+    </div>
+
+    <form name="wtf-submissions" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/submission-success" class="submit-form">
+      <!-- Honeypot -->
+      <p style="display:none;">
+        <label>Don't fill this out: <input name="bot-field" /></label>
+      </p>
+      <input type="hidden" name="form-name" value="wtf-submissions" />
+
+      <!-- Story -->
+      <div class="submit-field">
+        <label for="story">Your WTF Moment <span class="required">*</span></label>
+        <textarea 
+          id="story" 
+          name="story" 
+          rows="8" 
+          placeholder="Tell us what happened. The more detail, the better. We're here for the full chaos report."
+          required
+        ></textarea>
+        <div class="submit-field-hint">Be specific. We need the details for proper documentation.</div>
+      </div>
+
+      <!-- Category -->
+      <div class="submit-field">
+        <label for="category">Category <span class="required">*</span></label>
+        <select id="category" name="category" required>
+          <option value="">Select a category</option>
+          <option value="Work WTFs">Work WTFs</option>
+          <option value="Life & Relationships">Life & Relationships</option>
+          <option value="Everyday Disasters">Everyday Disasters</option>
+          <option value="Petty Offenses">Petty Offenses</option>
+        </select>
+      </div>
+
+      <!-- Chaos Score -->
+      <div class="submit-field">
+        <label for="chaos-score">Chaos Score (1-10) <span class="required">*</span></label>
+        <div class="chaos-slider-container">
+          <input 
+            type="range" 
+            id="chaos-score" 
+            name="chaos_score" 
+            min="1" 
+            max="10" 
+            value="5" 
+            class="chaos-slider"
+            required
+          />
+          <div class="chaos-slider-labels">
+            <span>1<br><small>Mild Annoyance</small></span>
+            <span>5<br><small>Solid WTF</small></span>
+            <span>10<br><small>Crime Scene</small></span>
+          </div>
+          <div class="chaos-slider-value">Score: <strong id="chaos-value">5</strong>/10</div>
+        </div>
+      </div>
+
+      <!-- Location (Optional) -->
+      <div class="submit-field">
+        <label for="location">Location <span class="optional">(Optional)</span></label>
+        <input 
+          type="text" 
+          id="location" 
+          name="location" 
+          placeholder="City, State (e.g., Austin, TX)"
+        />
+        <div class="submit-field-hint">Helps us document regional chaos patterns. No specific addresses.</div>
+      </div>
+
+      <!-- Name / Anonymous -->
+      <div class="submit-field">
+        <label for="submitter-name">Your Name <span class="optional">(Optional)</span></label>
+        <input 
+          type="text" 
+          id="submitter-name" 
+          name="submitter_name" 
+          placeholder="Your name or leave blank"
+        />
+        <div class="submit-field-checkbox">
+          <input type="checkbox" id="anonymous" name="anonymous" value="yes" />
+          <label for="anonymous">Submit anonymously (we won't use your name)</label>
+        </div>
+      </div>
+
+      <!-- Consent -->
+      <div class="submit-field">
+        <div class="submit-field-checkbox submit-consent">
+          <input type="checkbox" id="consent" name="consent" value="yes" required />
+          <label for="consent">
+            I consent for this story to be published on A WTF Kind of Day. 
+            I understand it may be edited for length and clarity. 
+            All submissions are anonymized unless I specifically request attribution.
+          </label>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="submit-button">Submit Your Chaos →</button>
+    </form>
+
+    <p class="submit-footer-note">
+      All submissions are reviewed before publishing. We document the chaos with respect and dry wit. 
+      No personal information is shared without your explicit permission.
+    </p>
+  </div>
+</div>
+
+<!-- Chaos Score Slider JavaScript -->
+<script>
+  const chaosSlider = document.getElementById('chaos-score');
+  const chaosValue = document.getElementById('chaos-value');
+  
+  if (chaosSlider && chaosValue) {
+    chaosSlider.addEventListener('input', function() {
+      chaosValue.textContent = this.value;
+    });
+  }
+
+  // Modal controls
+  const submitModal = document.getElementById('submit-modal');
+  const submitButton = document.getElementById('submit-wtf-btn');
+  const closeButton = document.querySelector('.submit-modal-close');
+  const overlay = document.querySelector('.submit-modal-overlay');
+
+  if (submitButton) {
+    submitButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      submitModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  }
+
+  if (closeButton) {
+    closeButton.addEventListener('click', function() {
+      submitModal.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  }
+
+  if (overlay) {
+    overlay.addEventListener('click', function() {
+      submitModal.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  }
+
+  // Close on ESC key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && submitModal && submitModal.classList.contains('active')) {
+      submitModal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+</script>
+
+<style>
+/* ==================== SUBMIT MODAL STYLES ==================== */
+.submit-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.submit-modal.active {
+  display: flex;
+}
+
+.submit-modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(4px);
+}
+
+.submit-modal-content {
+  position: relative;
+  background: var(--white);
+  max-width: 700px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  border: 2px solid var(--black);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  z-index: 10000;
+}
+
+.submit-modal-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 40px;
+  height: 40px;
+  border: 1.5px solid var(--black);
+  background: var(--white);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 300;
+  z-index: 10;
+}
+
+.submit-modal-close:hover {
+  background: var(--black);
+  color: var(--white);
+}
+
+.submit-modal-header {
+  padding: 3rem 3rem 2rem;
+  border-bottom: 1.5px solid var(--black);
+  background: var(--gray-100);
+}
+
+.submit-modal-title {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin-bottom: 0.8rem;
+  line-height: 1.1;
+}
+
+.submit-modal-subtitle {
+  font-size: 1rem;
+  color: var(--gray-600);
+  line-height: 1.6;
+}
+
+.submit-form {
+  padding: 3rem;
+}
+
+.submit-field {
+  margin-bottom: 2rem;
+}
+
+.submit-field label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+  color: var(--black);
+}
+
+.required {
+  color: var(--red);
+}
+
+.optional {
+  color: var(--gray-400);
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.submit-field input[type="text"],
+.submit-field input[type="email"],
+.submit-field textarea,
+.submit-field select {
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  border: 1.5px solid var(--gray-200);
+  background: var(--white);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+  outline: none;
+}
+
+.submit-field input:focus,
+.submit-field textarea:focus,
+.submit-field select:focus {
+  border-color: var(--accent);
+}
+
+.submit-field textarea {
+  resize: vertical;
+  min-height: 150px;
+  line-height: 1.6;
+}
+
+.submit-field-hint {
+  font-size: 0.75rem;
+  color: var(--gray-400);
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
+
+.submit-field-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  margin-top: 0.8rem;
+}
+
+.submit-field-checkbox input[type="checkbox"] {
+  margin-top: 0.2rem;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.submit-field-checkbox label {
+  font-size: 0.85rem;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.submit-consent {
+  padding: 1.2rem;
+  background: var(--gray-100);
+  border: 1px solid var(--gray-200);
+}
+
+.chaos-slider-container {
+  padding: 1.5rem;
+  background: var(--gray-100);
+  border: 1.5px solid var(--gray-200);
+}
+
+.chaos-slider {
+  width: 100%;
+  height: 8px;
+  background: var(--gray-200);
+  outline: none;
+  border-radius: 0;
+  -webkit-appearance: none;
+  margin-bottom: 1rem;
+}
+
+.chaos-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  background: var(--accent);
+  border: 2px solid var(--black);
+  cursor: pointer;
+}
+
+.chaos-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  background: var(--accent);
+  border: 2px solid var(--black);
+  cursor: pointer;
+  border-radius: 0;
+}
+
+.chaos-slider-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: var(--gray-600);
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+}
+
+.chaos-slider-labels small {
+  display: block;
+  font-size: 0.65rem;
+  color: var(--gray-400);
+  margin-top: 0.2rem;
+  font-weight: 400;
+}
+
+.chaos-slider-value {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--black);
+}
+
+.chaos-slider-value strong {
+  font-size: 1.5rem;
+  color: var(--accent);
+  font-weight: 800;
+}
+
+.submit-button {
+  width: 100%;
+  background: var(--black);
+  color: var(--white);
+  border: 1.5px solid var(--black);
+  padding: 1.2rem 2rem;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s;
+  margin-top: 1rem;
+}
+
+.submit-button:hover {
+  background: var(--white);
+  color: var(--black);
+}
+
+.submit-footer-note {
+  padding: 2rem 3rem 3rem;
+  font-size: 0.8rem;
+  color: var(--gray-400);
+  line-height: 1.6;
+  text-align: center;
+  border-top: 1px solid var(--gray-200);
+}
+
+@media (max-width: 768px) {
+  .submit-modal {
+    padding: 1rem;
+  }
+  
+  .submit-modal-content {
+    max-height: 95vh;
+  }
+  
+  .submit-modal-header {
+    padding: 2rem 1.5rem 1.5rem;
+  }
+  
+  .submit-modal-title {
+    font-size: 2rem;
+  }
+  
+  .submit-form {
+    padding: 2rem 1.5rem;
+  }
+  
+  .submit-footer-note {
+    padding: 1.5rem;
+  }
+}
+</style>
+
     </div>
   </div>
 </section>
