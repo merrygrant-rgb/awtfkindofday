@@ -3,6 +3,10 @@ title: The 4-Hour Windshield Wiper Odyssey
 date: 2026-02-17T19:46:00.000-06:00
 category: Everyday Disasters
 featured: true
+teaser: |-
+  I drove four hours in a Wisconsin snowstorm to fix my windshield wipers.
+  The dealership said it wasn’t covered and they didn’t have the part.
+  I returned home feral.
 read_time: 5
 chaos_score: 9
 tags:
