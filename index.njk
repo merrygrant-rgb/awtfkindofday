@@ -526,7 +526,14 @@ permalink: /
     </div>
   </div>
   <div class="newsletter-right fade-up fade-up-delay-1">
-    <form name="newsletter" method="POST" data-netlify="true" class="newsletter-form">
+    <form name="newsletter" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/newsletter-success" class="newsletter-form">
+      <!-- Hidden honeypot field for spam protection -->
+      <p style="display:none;">
+        <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+      </p>
+      <!-- Hidden field so Netlify knows this is the newsletter form -->
+      <input type="hidden" name="form-name" value="newsletter" />
+      
       <div class="newsletter-field">
         <label for="first-name">First Name</label>
         <input type="text" id="first-name" name="first_name" placeholder="Your first name">
@@ -540,6 +547,7 @@ permalink: /
     <p class="newsletter-promise">One email per week. Unsubscribe whenever. No hard feelings. (There will be feelings. Just not at you.)</p>
   </div>
 </section>
+
 
 <!-- ==================== QUOTE BANNER ==================== -->
 <div class="quote-banner fade-up">
