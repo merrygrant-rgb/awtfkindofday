@@ -22,8 +22,25 @@ collections:
       - {label: "Body", name: "body", widget: "markdown"}
       - {label: "Read Time (minutes)", name: "read_time", widget: "number", default: 5}
       - {label: "Emotional Tags", name: "tags", widget: "select", multiple: true, options: ["Rage", "Confusion", "Secondhand Embarrassment", "Justified Irritation", "Validation", "Despair"], required: false}
-      - {label: "Related Merch (slug)", name: "related_merch", widget: "string", required: false, hint: "Enter the slug of related product, e.g. 'personal-space-mug'"}
+      - {label: "Related Merch (slug)", name: "related_merch", widget: "string", required: false}
       - {label: "Validation Count", name: "validation_count", widget: "number", default: 0, required: false}
+      - {label: "Layout", name: "layout", widget: "hidden", default: "layouts/post.njk"}
+
+  # Group Chat Chronicles
+  - name: "chronicles"
+    label: "Group Chat Chronicles"
+    label_singular: "Chronicle Episode"
+    folder: "content/chronicles"
+    create: true
+    slug: "episode-{{episode_number}}-{{slug}}"
+    fields:
+      - {label: "Episode Number", name: "episode_number", widget: "number", min: 1}
+      - {label: "Episode Title", name: "episode_title", widget: "string", hint: "e.g., 'The Trauma Bond'"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Teaser", name: "teaser", widget: "text", hint: "2-3 sentences for archive page"}
+      - {label: "Featured Image", name: "featured_image", widget: "image", required: false, hint: "Optional - will use mock chat if not provided"}
+      - {label: "Content", name: "body", widget: "markdown"}
+      - {label: "Read Time (minutes)", name: "read_time", widget: "number", default: 8}
       - {label: "Layout", name: "layout", widget: "hidden", default: "layouts/post.njk"}
 
   # Merchandise
@@ -37,11 +54,11 @@ collections:
       - {label: "Product Type", name: "type", widget: "select", options: ["Tee", "Hoodie", "Mug", "Tote", "Print", "Sticker Pack", "Other"]}
       - {label: "Price", name: "price", widget: "number"}
       - {label: "Slogan/Tagline", name: "slogan", widget: "string"}
-      - {label: "Origin Story (2 sentences max)", name: "origin_story", widget: "text", hint: "Why this product exists, which post inspired it"}
-      - {label: "Related Post (slug)", name: "related_post", widget: "string", required: false, hint: "Slug of the blog post this relates to"}
+      - {label: "Origin Story (2 sentences max)", name: "origin_story", widget: "text"}
+      - {label: "Related Post (slug)", name: "related_post", widget: "string", required: false}
       - {label: "Product Images", name: "images", widget: "list", field: {label: "Image", name: "image", widget: "image"}}
       - {label: "Limited Edition", name: "limited_edition", widget: "boolean", default: false}
-      - {label: "Badge Text", name: "badge", widget: "string", required: false, hint: "e.g., 'Best Seller', 'New', 'Limited'"}
+      - {label: "Badge Text", name: "badge", widget: "string", required: false}
       - {label: "In Stock", name: "in_stock", widget: "boolean", default: true}
       - {label: "Description", name: "body", widget: "markdown", required: false}
 
@@ -57,7 +74,7 @@ collections:
       - {label: "Submitted Date", name: "date", widget: "datetime"}
       - {label: "Feature on Homepage", name: "featured", widget: "boolean", default: false}
       - {label: "Validation Count", name: "validation_count", widget: "number", default: 0}
-      - {label: "Submitter Name", name: "submitter", widget: "string", hint: "Anonymous if not provided", required: false}
+      - {label: "Submitter Name", name: "submitter", widget: "string", required: false}
       - {label: "Content", name: "body", widget: "markdown"}
 
   # Site Settings
