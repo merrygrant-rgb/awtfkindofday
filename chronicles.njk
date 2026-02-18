@@ -1,0 +1,293 @@
+---
+layout: layouts/base.njk
+permalink: /chronicles/
+title: The Group Chat Chronicles
+description: A semi-fictional study of corporate survival through group texts, passive aggression, and the sacred bond of workplace survivors.
+---
+
+<div class="chronicles-archive">
+  
+  <!-- Archive Header -->
+  <header class="chronicles-archive-header">
+    <div class="chronicles-archive-header-inner">
+      <div class="chronicles-archive-label">Weekly Series · Sundays</div>
+      <h1 class="chronicles-archive-title">The Group Chat Chronicles</h1>
+      <p class="chronicles-archive-tagline">"Every office has a Bill. Every survivor has a side chat."</p>
+      <div class="chronicles-archive-intro">
+        <p>A semi-fictional study of corporate survival through the lens of group texts, passive aggression, and the sacred bond formed by those who simply cannot with Gary from Finance anymore.</p>
+        <p>These are the conversations that happen after the meeting. The ones that don't make it to Slack. The ones that keep entire departments emotionally functional.</p>
+        <p>New episodes every Sunday. Start at the beginning. Trust us.</p>
+      </div>
+      
+      {% set firstEpisode = collections.chronicles | reverse | first %}
+      {% if firstEpisode %}
+      <a href="{{ firstEpisode.url }}" class="btn btn-primary chronicles-archive-cta">Start at Episode 1 →</a>
+      {% endif %}
+    </div>
+  </header>
+
+  <!-- Episode List -->
+  <section class="chronicles-archive-episodes">
+    <div class="chronicles-archive-episodes-inner">
+      <h2 class="chronicles-archive-episodes-title">All Episodes</h2>
+      
+      {% if collections.chronicles %}
+        <div class="chronicles-episode-list">
+          {% for episode in collections.chronicles | reverse %}
+          <article class="chronicles-episode-card">
+            <div class="chronicles-episode-card-header">
+              <span class="chronicles-episode-number">Episode {{ episode.data.episode_number }}</span>
+              <span class="chronicles-episode-date">{{ episode.date | readableDate }}</span>
+            </div>
+            <h3 class="chronicles-episode-card-title">{{ episode.data.episode_title }}</h3>
+            <p class="chronicles-episode-card-teaser">{{ episode.data.teaser }}</p>
+            {% if episode.data.featured_image %}
+            <div class="chronicles-episode-card-image">
+              <img src="{{ episode.data.featured_image }}" alt="{{ episode.data.episode_title }}">
+            </div>
+            {% endif %}
+            <div class="chronicles-episode-card-footer">
+              <a href="{{ episode.url }}" class="chronicles-episode-card-read">Read Episode {{ episode.data.episode_number }}</a>
+              <span class="chronicles-episode-card-time">{{ episode.data.read_time or '8' }} min read</span>
+            </div>
+          </article>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="chronicles-empty">
+          <p>Episodes coming soon. Check back Sundays.</p>
+        </div>
+      {% endif %}
+    </div>
+  </section>
+
+  <!-- Back to Home -->
+  <div class="chronicles-archive-footer">
+    <a href="/" class="btn btn-secondary">← Back to Home</a>
+  </div>
+
+</div>
+
+<style>
+/* ==================== CHRONICLES ARCHIVE PAGE ==================== */
+.chronicles-archive {
+  padding-top: 68px;
+  min-height: 100vh;
+}
+
+.chronicles-archive-header {
+  background: linear-gradient(135deg, #f5efe4 0%, #f0ebe2 100%);
+  border-bottom: 1.5px solid var(--black);
+  padding: 6rem 0 5rem;
+  text-align: center;
+}
+
+.chronicles-archive-header-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 5%;
+}
+
+.chronicles-archive-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: rgba(200, 169, 110, 0.1);
+  border: 1px solid var(--accent);
+}
+
+.chronicles-archive-title {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  color: var(--black);
+  letter-spacing: -0.02em;
+}
+
+.chronicles-archive-tagline {
+  font-size: 1.5rem;
+  font-style: italic;
+  color: var(--gray-600);
+  margin-bottom: 2.5rem;
+  line-height: 1.4;
+  font-family: var(--font-display);
+}
+
+.chronicles-archive-intro {
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  text-align: left;
+}
+
+.chronicles-archive-intro p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  color: var(--black);
+}
+
+.chronicles-archive-cta {
+  font-size: 1rem;
+  padding: 1rem 2.5rem;
+}
+
+.chronicles-archive-episodes {
+  background: var(--white);
+  padding: 5rem 0;
+}
+
+.chronicles-archive-episodes-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 5%;
+}
+
+.chronicles-archive-episodes-title {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.chronicles-episode-list {
+  display: grid;
+  gap: 3rem;
+}
+
+.chronicles-episode-card {
+  background: var(--white);
+  border: 2px solid var(--black);
+  padding: 2.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.chronicles-episode-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 8px 8px 0 var(--accent-light);
+}
+
+.chronicles-episode-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.chronicles-episode-number {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(200, 169, 110, 0.1);
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--accent);
+}
+
+.chronicles-episode-date {
+  font-size: 0.85rem;
+  color: var(--gray-400);
+  font-weight: 600;
+}
+
+.chronicles-episode-card-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: var(--black);
+}
+
+.chronicles-episode-card-teaser {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--gray-600);
+  margin-bottom: 1.5rem;
+}
+
+.chronicles-episode-card-image {
+  margin: 1.5rem 0;
+  border: 1.5px solid var(--black);
+  overflow: hidden;
+}
+
+.chronicles-episode-card-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.chronicles-episode-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--gray-200);
+}
+
+.chronicles-episode-card-read {
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--black);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.chronicles-episode-card-read:hover {
+  color: var(--accent);
+}
+
+.chronicles-episode-card-time {
+  font-size: 0.85rem;
+  color: var(--gray-400);
+  font-weight: 600;
+}
+
+.chronicles-empty {
+  text-align: center;
+  padding: 5rem 0;
+  color: var(--gray-400);
+  font-size: 1.1rem;
+}
+
+.chronicles-archive-footer {
+  background: var(--gray-100);
+  padding: 4rem 0;
+  text-align: center;
+  border-top: 1.5px solid var(--black);
+}
+
+@media (max-width: 768px) {
+  .chronicles-archive-title {
+    font-size: 2.5rem;
+  }
+  
+  .chronicles-episode-card {
+    padding: 2rem;
+  }
+  
+  .chronicles-episode-card-title {
+    font-size: 1.5rem;
+  }
+  
+  .chronicles-episode-card-footer {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+}
+</style>
