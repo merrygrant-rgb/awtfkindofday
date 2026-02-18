@@ -5,7 +5,7 @@ category: Work WTFs
 featured: true
 teaser: They don’t steal wallets — they steal commissions.
 read_time: 5
-chaos_score: 7
+chaos_score: 9
 validation_count: 1231
 layout: layouts/post.njk
 ---
