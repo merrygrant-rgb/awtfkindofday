@@ -21,6 +21,7 @@ collections:
       - {label: "Featured Image", name: "image", widget: "image", required: false}
       - {label: "Body", name: "body", widget: "markdown"}
       - {label: "Read Time (minutes)", name: "read_time", widget: "number", default: 5}
+      - {label: "Chaos Score (1-10)", name: "chaos_score", widget: "number", min: 1, max: 10, default: 7, hint: "Rate the chaos level of this post from 1-10"}
       - {label: "Emotional Tags", name: "tags", widget: "select", multiple: true, options: ["Rage", "Confusion", "Secondhand Embarrassment", "Justified Irritation", "Validation", "Despair"], required: false}
       - {label: "Related Merch (slug)", name: "related_merch", widget: "string", required: false}
       - {label: "Validation Count", name: "validation_count", widget: "number", default: 0, required: false}
@@ -41,6 +42,7 @@ collections:
       - {label: "Featured Image", name: "featured_image", widget: "image", required: false, hint: "Optional - will use mock chat if not provided"}
       - {label: "Content", name: "body", widget: "markdown"}
       - {label: "Read Time (minutes)", name: "read_time", widget: "number", default: 8}
+      - {label: "Chaos Score (1-10)", name: "chaos_score", widget: "number", min: 1, max: 10, default: 7, hint: "Rate the chaos level of this post from 1-10"}
       - {label: "Layout", name: "layout", widget: "hidden", default: "layouts/post.njk"}
 
   # Merchandise
