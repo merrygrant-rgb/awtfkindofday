@@ -5,7 +5,11 @@ category: Everyday Disasters
 featured: true
 read_time: 5
 chaos_score: 9
-validation_count: 0
+tags:
+  - Rage
+  - Justified Irritation
+  - Despair
+validation_count: 1160
 layout: layouts/post.njk
 ---
 There is a very specific kind of rage reserved for modern warranty systems.
