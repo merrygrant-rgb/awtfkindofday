@@ -445,6 +445,9 @@ permalink: /
         </div>
       </div>
       <div class="post-body">
+{% if post.data.reader_submitted %}
+<div class="post-reader-badge">READER SUBMITTED</div>
+{% endif %}
         <h3 class="post-title">{{ post.data.title }}</h3>
         <p class="post-teaser">{{ post.data.teaser }}</p>
         <div class="post-footer">
@@ -464,6 +467,9 @@ permalink: /
         </div>
       </div>
       <div class="post-body">
+{% if post.data.reader_submitted %}
+<div class="post-reader-badge">READER SUBMITTED</div>
+{% endif %}
         <h3 class="post-title">The 47-Minute Meeting That Was, In Fact, An Email</h3>
         <p class="post-teaser">A real-time forensic analysis of how six adults with working calendars ended up in a conference room to discuss something that could have been resolved with three sentences and a reply-all.</p>
         <div class="post-footer">
@@ -481,6 +487,9 @@ permalink: /
         </div>
       </div>
       <div class="post-body">
+{% if post.data.reader_submitted %}
+<div class="post-reader-badge">READER SUBMITTED</div>
+{% endif %}
         <h3 class="post-title">Personal Space Is Not a Suggestion. It Is a Social Contract.</h3>
         <p class="post-teaser">An investigation into why certain individuals at coffee shop counters, grocery checkout lines, and every elevator in existence operate on the assumption that 18 inches of buffer space is negotiable.</p>
         <div class="post-footer">
@@ -498,6 +507,9 @@ permalink: /
         </div>
       </div>
       <div class="post-body">
+{% if post.data.reader_submitted %}
+<div class="post-reader-badge">READER SUBMITTED</div>
+{% endif %}
         <h3 class="post-title">They Said "Let's Keep It Casual" And Then Sent a Paragraph</h3>
         <p class="post-teaser">A careful textual analysis of the modern communication breakdown, in which the rules are invented, redefined, and quietly enforced by exactly one party who did not share the rulebook.</p>
         <div class="post-footer">
