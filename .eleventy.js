@@ -21,7 +21,7 @@ module.exports = function(eleventyConfig) {
     return arr.slice(0, limit);
   });
 
-  // WHERE filter (this was missing - now fixed!)
+  // WHERE filter
   eleventyConfig.addFilter("where", function(array, key, value) {
     if (!Array.isArray(array)) return [];
     return array.filter(item => {
@@ -32,6 +32,18 @@ module.exports = function(eleventyConfig) {
       }
       return val == value;
     });
+  });
+
+  // Reverse filter
+  eleventyConfig.addFilter("reverse", (arr) => {
+    if (!Array.isArray(arr)) return [];
+    return [...arr].reverse();
+  });
+
+  // First filter
+  eleventyConfig.addFilter("first", (arr) => {
+    if (!Array.isArray(arr) || arr.length === 0) return null;
+    return arr[0];
   });
 
   // Collections
@@ -45,6 +57,11 @@ module.exports = function(eleventyConfig) {
       .filter(post => post.data.featured === true)
       .sort((a, b) => b.date - a.date)
       .slice(0, 3);
+  });
+
+  eleventyConfig.addCollection("chronicles", collection => {
+    return collection.getFilteredByGlob("content/chronicles/*.md")
+      .sort((a, b) => (a.data.episode_number || 0) - (b.data.episode_number || 0));
   });
 
   eleventyConfig.addCollection("merch", collection => {
