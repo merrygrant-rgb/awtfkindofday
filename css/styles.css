@@ -1347,3 +1347,17 @@
   max-width: 720px !important;
   margin: 0 auto !important;
 }
+/* ==================== READER SUBMITTED BADGE ==================== */
+.post-reader-badge {
+  display: inline-block;
+  font-size: 0.55rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: var(--red);
+  color: var(--white);
+  padding: 0.4rem 0.8rem;
+  margin-bottom: 1rem;
+  border: 1.5px solid var(--red);
+}
+
