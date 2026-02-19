@@ -2,10 +2,11 @@
 title: The Prospect Pickpocket
 date: 2026-02-16T22:48:00.000-06:00
 category: Work WTFs
-featured: true
+featured: false
 teaser: They don’t steal wallets — they steal commissions.
 read_time: 5
 chaos_score: 9
+reader_submitted: true
 validation_count: 1231
 layout: layouts/post.njk
 ---
