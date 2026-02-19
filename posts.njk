@@ -1,0 +1,406 @@
+---
+layout: layouts/base.njk
+permalink: /posts/
+title: The Archive
+description: Every documented WTF. Filter by category, sort by chaos, find your validation.
+---
+
+<div class="archive-page">
+  
+  <!-- Archive Hero -->
+  <header class="archive-hero">
+    <div class="archive-hero-inner">
+      <div class="section-label">The Complete Collection</div>
+      <h1 class="archive-title">The Archive</h1>
+      <p class="archive-subtitle">Every documented WTF. Every workplace disaster. Every petty offense. Filter by your preferred flavor of chaos.</p>
+    </div>
+  </header>
+
+  <!-- Filter Bar -->
+  <div class="archive-filters">
+    <div class="archive-filters-inner">
+      
+      <!-- Category Filters -->
+      <div class="filter-section">
+        <div class="filter-label">Category</div>
+        <div class="filter-buttons" id="category-filters">
+          <button class="filter-btn active" data-category="all">All Posts</button>
+          <button class="filter-btn" data-category="Work WTFs">Work WTFs</button>
+          <button class="filter-btn" data-category="Life & Relationships">Life & Relationships</button>
+          <button class="filter-btn" data-category="Everyday Disasters">Everyday Disasters</button>
+          <button class="filter-btn" data-category="Petty Offenses">Petty Offenses</button>
+        </div>
+      </div>
+
+      <!-- Sort & Options -->
+      <div class="filter-section filter-section-row">
+        <div class="filter-group">
+          <div class="filter-label">Sort By</div>
+          <div class="filter-buttons" id="sort-filters">
+            <button class="filter-btn active" data-sort="latest">Latest First</button>
+            <button class="filter-btn" data-sort="chaos">Highest Chaos</button>
+            <button class="filter-btn" data-sort="validated">Most Validated</button>
+          </div>
+        </div>
+        
+        <div class="filter-group">
+          <label class="filter-checkbox">
+            <input type="checkbox" id="reader-only" />
+            <span>Reader Submitted Only</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Results Count -->
+      <div class="filter-results">
+        Showing <strong id="results-count">0</strong> posts
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Posts Grid -->
+  <section class="archive-posts">
+    <div class="archive-posts-inner">
+      <div class="posts-grid" id="posts-grid">
+        {% for post in collections.posts %}
+        <a href="{{ post.url }}" 
+           class="post-card" 
+           data-category="{{ post.data.category }}"
+           data-chaos="{{ post.data.chaos_score or 7 }}"
+           data-validated="{{ post.data.validation_count or 0 }}"
+           data-reader="{{ post.data.reader_submitted or false }}"
+           data-date="{{ post.date | date('YYYY-MM-DD') }}">
+          <div class="post-header">
+            <span class="post-tag">{{ post.data.category }}</span>
+            <div class="post-chaos-badge">
+              <span style="font-size: 0.6rem; letter-spacing: 0.1em; opacity: 0.7;">CHAOS</span>
+              <span style="font-weight: 800;">{{ post.data.chaos_score or '7' }}/10</span>
+            </div>
+          </div>
+          <div class="post-body">
+            {% if post.data.reader_submitted %}
+            <div class="post-reader-badge">READER SUBMITTED</div>
+            {% endif %}
+            <h3 class="post-title">{{ post.data.title }}</h3>
+            <p class="post-teaser">{{ post.data.teaser }}</p>
+            <div class="post-footer">
+              <span class="post-meta">{{ post.date | readableDate }} · {{ post.data.read_time or '5' }} min read</span>
+              <span class="post-read-more">Read More</span>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+
+      <!-- Empty State -->
+      <div class="archive-empty" id="empty-state" style="display: none;">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" style="opacity: 0.3; margin-bottom: 1.5rem;">
+          <rect x="10" y="15" width="60" height="50" rx="2" stroke="currentColor" stroke-width="2"/>
+          <line x1="25" y1="30" x2="55" y2="30" stroke="currentColor" stroke-width="2"/>
+          <line x1="25" y1="40" x2="50" y2="40" stroke="currentColor" stroke-width="2" opacity="0.5"/>
+          <line x1="25" y1="50" x2="45" y2="50" stroke="currentColor" stroke-width="2" opacity="0.5"/>
+        </svg>
+        <h3 style="font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; margin-bottom: 0.8rem;">No Posts Found</h3>
+        <p style="color: var(--gray-600); font-size: 1rem;">Try adjusting your filters or check back later for more documented chaos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Back Button -->
+  <div class="archive-footer">
+    <a href="/" class="btn btn-secondary">← Back to Home</a>
+  </div>
+
+</div>
+
+<script>
+// Archive Filtering & Sorting
+(function() {
+  const postsGrid = document.getElementById('posts-grid');
+  const emptyState = document.getElementById('empty-state');
+  const resultsCount = document.getElementById('results-count');
+  const allPosts = Array.from(document.querySelectorAll('.post-card'));
+  
+  let currentCategory = 'all';
+  let currentSort = 'latest';
+  let readerOnly = false;
+
+  // Category Filter
+  document.getElementById('category-filters').addEventListener('click', (e) => {
+    if (e.target.classList.contains('filter-btn')) {
+      document.querySelectorAll('#category-filters .filter-btn').forEach(btn => btn.classList.remove('active'));
+      e.target.classList.add('active');
+      currentCategory = e.target.dataset.category;
+      filterAndSort();
+    }
+  });
+
+  // Sort Filter
+  document.getElementById('sort-filters').addEventListener('click', (e) => {
+    if (e.target.classList.contains('filter-btn')) {
+      document.querySelectorAll('#sort-filters .filter-btn').forEach(btn => btn.classList.remove('active'));
+      e.target.classList.add('active');
+      currentSort = e.target.dataset.sort;
+      filterAndSort();
+    }
+  });
+
+  // Reader Submitted Toggle
+  document.getElementById('reader-only').addEventListener('change', (e) => {
+    readerOnly = e.target.checked;
+    filterAndSort();
+  });
+
+  function filterAndSort() {
+    // Filter
+    let filtered = allPosts.filter(post => {
+      const category = post.dataset.category;
+      const isReader = post.dataset.reader === 'true';
+      
+      const categoryMatch = currentCategory === 'all' || category === currentCategory;
+      const readerMatch = !readerOnly || isReader;
+      
+      return categoryMatch && readerMatch;
+    });
+
+    // Sort
+    filtered.sort((a, b) => {
+      if (currentSort === 'latest') {
+        return new Date(b.dataset.date) - new Date(a.dataset.date);
+      } else if (currentSort === 'chaos') {
+        return parseInt(b.dataset.chaos) - parseInt(a.dataset.chaos);
+      } else if (currentSort === 'validated') {
+        return parseInt(b.dataset.validated) - parseInt(a.dataset.validated);
+      }
+      return 0;
+    });
+
+    // Hide all posts
+    allPosts.forEach(post => post.style.display = 'none');
+
+    // Show filtered posts
+    if (filtered.length > 0) {
+      filtered.forEach((post, index) => {
+        post.style.display = 'flex';
+        post.style.animationDelay = `${index * 0.05}s`;
+      });
+      postsGrid.style.display = 'grid';
+      emptyState.style.display = 'none';
+    } else {
+      postsGrid.style.display = 'none';
+      emptyState.style.display = 'block';
+    }
+
+    // Update count
+    resultsCount.textContent = filtered.length;
+  }
+
+  // Initial load
+  filterAndSort();
+})();
+</script>
+
+<style>
+/* ==================== ARCHIVE PAGE ==================== */
+.archive-page {
+  padding-top: 68px;
+  min-height: 100vh;
+}
+
+.archive-hero {
+  background: var(--white);
+  border-bottom: 1.5px solid var(--black);
+  padding: 5rem 0 4rem;
+  text-align: center;
+}
+
+.archive-hero-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 5%;
+}
+
+.archive-title {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  color: var(--black);
+  letter-spacing: -0.02em;
+}
+
+.archive-subtitle {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: var(--gray-600);
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+/* Filter Bar */
+.archive-filters {
+  background: var(--gray-100);
+  border-bottom: 1.5px solid var(--black);
+  padding: 3rem 0;
+}
+
+.archive-filters-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 5%;
+}
+
+.filter-section {
+  margin-bottom: 2rem;
+}
+
+.filter-section:last-child {
+  margin-bottom: 0;
+}
+
+.filter-section-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.filter-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gray-600);
+  margin-bottom: 0.8rem;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.7rem 1.5rem;
+  border: 1.5px solid var(--black);
+  background: var(--white);
+  color: var(--black);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filter-btn:hover {
+  background: var(--gray-200);
+}
+
+.filter-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--black);
+}
+
+.filter-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.7rem 1.5rem;
+  border: 1.5px solid var(--black);
+  background: var(--white);
+  transition: background 0.2s;
+}
+
+.filter-checkbox:hover {
+  background: var(--gray-200);
+}
+
+.filter-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.filter-results {
+  font-size: 0.85rem;
+  color: var(--gray-600);
+  margin-top: 1.5rem;
+  font-weight: 600;
+}
+
+.filter-results strong {
+  color: var(--black);
+  font-weight: 800;
+}
+
+/* Posts Grid */
+.archive-posts {
+  background: var(--gray-100);
+  padding: 5rem 0;
+  min-height: 50vh;
+}
+
+.archive-posts-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 5%;
+}
+
+.archive-empty {
+  text-align: center;
+  padding: 5rem 0;
+  color: var(--gray-600);
+}
+
+.archive-footer {
+  background: var(--white);
+  padding: 4rem 0;
+  text-align: center;
+  border-top: 1.5px solid var(--black);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.post-card {
+  animation: fadeIn 0.3s ease forwards;
+  opacity: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .archive-title {
+    font-size: 2.5rem;
+  }
+  
+  .filter-section-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .filter-buttons {
+    width: 100%;
+  }
+  
+  .filter-btn {
+    flex: 1 1 auto;
+  }
+}
+</style>
