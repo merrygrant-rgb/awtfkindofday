@@ -70,7 +70,7 @@ description: Every documented WTF. Filter by category, sort by chaos, find your 
            data-chaos="{{ post.data.chaos_score or 7 }}"
            data-validated="{{ post.data.validation_count or 0 }}"
            data-reader="{{ post.data.reader_submitted or false }}"
-           data-date="{{ post.date | date('YYYY-MM-DD') }}">
+           data-date="{{ post.date }}">
           <div class="post-header">
             <span class="post-tag">{{ post.data.category }}</span>
             <div class="post-chaos-badge">
