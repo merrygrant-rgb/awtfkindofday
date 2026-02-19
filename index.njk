@@ -153,7 +153,7 @@ permalink: /
     <p class="categories-header-right">Four distinct flavors of daily suffering, neatly categorized for your reading convenience.</p>
   </div>
   <div class="categories-grid">
-    <a href="/work-wtfs" class="cat-card fade-up">
+    <a href="/categories/work-wtfs" class="cat-card fade-up">
       <div class="cat-top">
         <span class="cat-num">01 / 04</span>
         <svg class="cat-icon" viewBox="0 0 48 48" fill="none"><rect x="6" y="10" width="36" height="28" rx="2" stroke-width="1.5"/><line x1="6" y1="18" x2="42" y2="18" stroke-width="1.5"/><line x1="16" y1="10" x2="16" y2="38" stroke-width="1.5"/><line x1="22" y1="24" x2="38" y2="24" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="29" x2="35" y2="29" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -165,7 +165,7 @@ permalink: /
         <div class="cat-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="2" y1="7" x2="12" y2="7" stroke-width="1.5" stroke-linecap="round"/><path d="M8 3.5L11.5 7L8 10.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </div>
     </a>
-    <a href="/life-relationships" class="cat-card fade-up fade-up-delay-1">
+    <a href="/categories/life-relationships" class="cat-card fade-up fade-up-delay-1">
       <div class="cat-top">
         <span class="cat-num">02 / 04</span>
         <svg class="cat-icon" viewBox="0 0 48 48" fill="none"><circle cx="18" cy="16" r="6" stroke-width="1.5"/><circle cx="30" cy="16" r="6" stroke-width="1.5"/><path d="M6 38c0-7 5.4-12 12-12" stroke-width="1.5" stroke-linecap="round"/><path d="M42 38c0-7-5.4-12-12-12" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -177,7 +177,7 @@ permalink: /
         <div class="cat-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="2" y1="7" x2="12" y2="7" stroke-width="1.5" stroke-linecap="round"/><path d="M8 3.5L11.5 7L8 10.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </div>
     </a>
-    <a href="/everyday-disasters" class="cat-card fade-up fade-up-delay-2">
+    <a href="/categories/everyday-disasters" class="cat-card fade-up fade-up-delay-2">
       <div class="cat-top">
         <span class="cat-num">03 / 04</span>
         <svg class="cat-icon" viewBox="0 0 48 48" fill="none"><polygon points="24,6 44,38 4,38" stroke-width="1.5" stroke-linejoin="round"/><line x1="24" y1="20" x2="24" y2="29" stroke-width="2" stroke-linecap="round"/><circle cx="24" cy="34" r="1.5" fill="currentColor"/></svg>
@@ -189,7 +189,7 @@ permalink: /
         <div class="cat-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="2" y1="7" x2="12" y2="7" stroke-width="1.5" stroke-linecap="round"/><path d="M8 3.5L11.5 7L8 10.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </div>
     </a>
-    <a href="/petty-offenses" class="cat-card fade-up fade-up-delay-3">
+    <a href="/categories/petty-offenses" class="cat-card fade-up fade-up-delay-3">
       <div class="cat-top">
         <span class="cat-num">04 / 04</span>
         <svg class="cat-icon" viewBox="0 0 48 48" fill="none"><rect x="8" y="8" width="14" height="14" rx="1" stroke-width="1.5"/><rect x="26" y="8" width="14" height="14" rx="1" stroke-width="1.5"/><rect x="8" y="26" width="14" height="14" rx="1" stroke-width="1.5"/><rect x="26" y="26" width="14" height="14" rx="1" stroke-width="1.5"/></svg>
@@ -445,9 +445,6 @@ permalink: /
         </div>
       </div>
       <div class="post-body">
-{% if post.data.reader_submitted %}
-<div class="post-reader-badge">READER SUBMITTED</div>
-{% endif %}
         <h3 class="post-title">{{ post.data.title }}</h3>
         <p class="post-teaser">{{ post.data.teaser }}</p>
         <div class="post-footer">
@@ -467,9 +464,6 @@ permalink: /
         </div>
       </div>
       <div class="post-body">
-{% if post.data.reader_submitted %}
-<div class="post-reader-badge">READER SUBMITTED</div>
-{% endif %}
         <h3 class="post-title">The 47-Minute Meeting That Was, In Fact, An Email</h3>
         <p class="post-teaser">A real-time forensic analysis of how six adults with working calendars ended up in a conference room to discuss something that could have been resolved with three sentences and a reply-all.</p>
         <div class="post-footer">
@@ -487,9 +481,6 @@ permalink: /
         </div>
       </div>
       <div class="post-body">
-{% if post.data.reader_submitted %}
-<div class="post-reader-badge">READER SUBMITTED</div>
-{% endif %}
         <h3 class="post-title">Personal Space Is Not a Suggestion. It Is a Social Contract.</h3>
         <p class="post-teaser">An investigation into why certain individuals at coffee shop counters, grocery checkout lines, and every elevator in existence operate on the assumption that 18 inches of buffer space is negotiable.</p>
         <div class="post-footer">
@@ -507,9 +498,6 @@ permalink: /
         </div>
       </div>
       <div class="post-body">
-{% if post.data.reader_submitted %}
-<div class="post-reader-badge">READER SUBMITTED</div>
-{% endif %}
         <h3 class="post-title">They Said "Let's Keep It Casual" And Then Sent a Paragraph</h3>
         <p class="post-teaser">A careful textual analysis of the modern communication breakdown, in which the rules are invented, redefined, and quietly enforced by exactly one party who did not share the rulebook.</p>
         <div class="post-footer">
@@ -538,14 +526,7 @@ permalink: /
     </div>
   </div>
   <div class="newsletter-right fade-up fade-up-delay-1">
-    <form name="newsletter" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/newsletter-success" class="newsletter-form">
-      <!-- Hidden honeypot field for spam protection -->
-      <p style="display:none;">
-        <label>Don't fill this out if you're human: <input name="bot-field" /></label>
-      </p>
-      <!-- Hidden field so Netlify knows this is the newsletter form -->
-      <input type="hidden" name="form-name" value="newsletter" />
-      
+    <form name="newsletter" method="POST" data-netlify="true" class="newsletter-form">
       <div class="newsletter-field">
         <label for="first-name">First Name</label>
         <input type="text" id="first-name" name="first_name" placeholder="Your first name">
@@ -559,7 +540,6 @@ permalink: /
     <p class="newsletter-promise">One email per week. Unsubscribe whenever. No hard feelings. (There will be feelings. Just not at you.)</p>
   </div>
 </section>
-
 
 <!-- ==================== QUOTE BANNER ==================== -->
 <div class="quote-banner fade-up">
@@ -688,13 +668,6 @@ permalink: /
       <div class="about-value-title">Zero Toxic Positivity</div>
       <p class="about-value-text">No silver linings unless they're sarcastic. No "lessons learned" unless the lesson is "people are exhausting."</p>
     </div>
-    <div class="about-value">
-      <div class="about-value-title">Reader Submitted Chaos</div>
-      <p class="about-value-text">The best WTF moments come from you. All submissions are anonymized. All chaos is validated.</p>
-    </div>
-    <div class="about-value">
-      <div class="about-value-title">Commerce as Extension</div>
-      <p class="about-value-text">Every product has an origin story tied to a real post. Merch here is editorial, not inventory.</p>
 <!-- ==================== SUBMIT WTF MODAL ==================== -->
 <div id="submit-modal" class="submit-modal">
   <div class="submit-modal-overlay"></div>
@@ -1153,8 +1126,3 @@ permalink: /
   }
 }
 </style>
-
-    </div>
-  </div>
-</section>
-
