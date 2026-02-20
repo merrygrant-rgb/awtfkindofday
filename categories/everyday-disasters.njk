@@ -15,10 +15,9 @@ title: Everyday Disasters
 
   <section class="category-posts">
     <div class="category-posts-inner">
-      {% set categoryPosts = collections.posts | selectattr("data.category", "equalto", "Everyday Disasters") %}
-      {% if categoryPosts.length > 0 %}
-        <div class="posts-grid">
-          {% for post in categoryPosts %}
+      <div class="posts-grid">
+        {% for post in collections.posts %}
+          {% if post.data.category == "Everyday Disasters" %}
           <a href="{{ post.url }}" class="post-card">
             <div class="post-header">
               <span class="post-tag">{{ post.data.category }}</span>
@@ -39,13 +38,9 @@ title: Everyday Disasters
               </div>
             </div>
           </a>
-          {% endfor %}
-        </div>
-      {% else %}
-        <div class="category-empty">
-          <p>No disasters documented yet. The WiFi is probably plotting something.</p>
-        </div>
-      {% endif %}
+          {% endif %}
+        {% endfor %}
+      </div>
     </div>
   </section>
 
@@ -53,3 +48,70 @@ title: Everyday Disasters
     <a href="/" class="btn btn-secondary">← Back to Home</a>
   </div>
 </div>
+
+<style>
+.category-page {
+  padding-top: 68px;
+  min-height: 100vh;
+}
+
+.category-header {
+  background: var(--white);
+  border-bottom: 1.5px solid var(--black);
+  padding: 5rem 0 4rem;
+  text-align: center;
+}
+
+.category-header-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 5%;
+}
+
+.category-number {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: var(--gray-400);
+  margin-bottom: 1rem;
+}
+
+.category-title {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  color: var(--black);
+}
+
+.category-description {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: var(--gray-600);
+}
+
+.category-posts {
+  background: var(--gray-100);
+  padding: 5rem 0;
+  min-height: 50vh;
+}
+
+.category-posts-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 5%;
+}
+
+.category-footer {
+  background: var(--white);
+  padding: 4rem 0;
+  text-align: center;
+  border-top: 1.5px solid var(--black);
+}
+
+@media (max-width: 768px) {
+  .category-title {
+    font-size: 2.5rem;
+  }
+}
+</style>
