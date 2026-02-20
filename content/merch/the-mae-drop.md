@@ -1,12 +1,15 @@
 ---
-title: The Mae Drop
+title: "“Not Today, Bill.”  - The Limited Edition It is What it Is...Cap "
 type: Other
 price: 28
-slogan: It is What it is....
-origin_story: The “Mae” was inspired by the wisest woman we know — the kind who
+slogan: The “Mae” was inspired by the wisest woman we know — the kind who
   doesn’t spiral, doesn’t rant, and definitely doesn’t create a 14-reply email
   chain like Bill. When things go sideways, she simply shrugs and says, “It is
   what it is,” and somehow the room recalibrates.
+origin_story: Some people panic. Some people escalate. Bill schedules a meeting
+  about it. Mae adjusts her crown, takes a sip of coffee, and says, “It is what
+  it is.”
+related_post: "Mae "
 images:
   - /images/uploads/screenshot-2026-02-20-103319.png
 limited_edition: true
