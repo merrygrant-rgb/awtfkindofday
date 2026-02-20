@@ -1,0 +1,129 @@
+---
+layout: layouts/base.njk
+permalink: /categories/work-wtfs/
+title: Work WTFs
+---
+
+<div class="category-page">
+  <header class="category-header">
+    <div class="category-header-inner">
+      <div class="category-number">01 / 04</div>
+      <h1 class="category-title">Work WTFs</h1>
+      <p class="category-description">Corporate chaos. Professional nonsense. The peculiar theater of pretending a meeting couldn't have been an email. Daily survival in hostile spreadsheet territory.</p>
+    </div>
+  </header>
+
+  <section class="category-posts">
+    <div class="category-posts-inner">
+      {% set categoryPosts = collections.posts | where("category", "Work WTFs") %}
+      {% if categoryPosts.length > 0 %}
+        <div class="posts-grid">
+          {% for post in categoryPosts %}
+          <a href="{{ post.url }}" class="post-card">
+            <div class="post-header">
+              <span class="post-tag">{{ post.data.category }}</span>
+              <div class="post-chaos-badge">
+                <span style="font-size: 0.6rem; letter-spacing: 0.1em; opacity: 0.7;">CHAOS</span>
+                <span style="font-weight: 800;">{{ post.data.chaos_score or '7' }}/10</span>
+              </div>
+            </div>
+            <div class="post-body">
+              {% if post.data.reader_submitted %}
+              <div class="post-reader-badge">READER SUBMITTED</div>
+              {% endif %}
+              <h3 class="post-title">{{ post.data.title }}</h3>
+              <p class="post-teaser">{{ post.data.teaser }}</p>
+              <div class="post-footer">
+                <span class="post-meta">{{ post.date | readableDate }} · {{ post.data.read_time or '5' }} min read</span>
+                <span class="post-read-more">Read More</span>
+              </div>
+            </div>
+          </a>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="category-empty">
+          <p>No Work WTFs yet. Check back soon for corporate chaos documentation.</p>
+        </div>
+      {% endif %}
+    </div>
+  </section>
+
+  <div class="category-footer">
+    <a href="/" class="btn btn-secondary">← Back to Home</a>
+  </div>
+</div>
+
+<style>
+.category-page {
+  padding-top: 68px;
+  min-height: 100vh;
+}
+
+.category-header {
+  background: var(--white);
+  border-bottom: 1.5px solid var(--black);
+  padding: 5rem 0 4rem;
+  text-align: center;
+}
+
+.category-header-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 5%;
+}
+
+.category-number {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: var(--gray-400);
+  margin-bottom: 1rem;
+}
+
+.category-title {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  color: var(--black);
+}
+
+.category-description {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: var(--gray-600);
+}
+
+.category-posts {
+  background: var(--gray-100);
+  padding: 5rem 0;
+  min-height: 50vh;
+}
+
+.category-posts-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 5%;
+}
+
+.category-empty {
+  text-align: center;
+  padding: 5rem 0;
+  color: var(--gray-600);
+  font-size: 1.1rem;
+}
+
+.category-footer {
+  background: var(--white);
+  padding: 4rem 0;
+  text-align: center;
+  border-top: 1.5px solid var(--black);
+}
+
+@media (max-width: 768px) {
+  .category-title {
+    font-size: 2.5rem;
+  }
+}
+</style>
