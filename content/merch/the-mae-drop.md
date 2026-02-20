@@ -10,6 +10,7 @@ origin_story: The “Mae” was inspired by the wisest woman we know — the kin
 images:
   - /images/uploads/screenshot-2026-02-20-103319.png
 limited_edition: true
+badge: Limited Edition
 in_stock: true
 ---
 Not everything deserves your blood pressure.
