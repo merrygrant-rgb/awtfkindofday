@@ -1,0 +1,55 @@
+---
+layout: layouts/base.njk
+permalink: /categories/life-relationships/
+title: Life & Relationships
+---
+
+<div class="category-page">
+  <header class="category-header">
+    <div class="category-header-inner">
+      <div class="category-number">02 / 04</div>
+      <h1 class="category-title">Life & Relationships</h1>
+      <p class="category-description">Trying to connect with humans. Sometimes it works. Often it's confusing. Occasionally it's one of those situations you replay at 3am wondering what exactly happened.</p>
+    </div>
+  </header>
+
+  <section class="category-posts">
+    <div class="category-posts-inner">
+      {% set categoryPosts = collections.posts | where("category", "Life & Relationships") %}
+      {% if categoryPosts.length > 0 %}
+        <div class="posts-grid">
+          {% for post in categoryPosts %}
+          <a href="{{ post.url }}" class="post-card">
+            <div class="post-header">
+              <span class="post-tag">{{ post.data.category }}</span>
+              <div class="post-chaos-badge">
+                <span style="font-size: 0.6rem; letter-spacing: 0.1em; opacity: 0.7;">CHAOS</span>
+                <span style="font-weight: 800;">{{ post.data.chaos_score or '7' }}/10</span>
+              </div>
+            </div>
+            <div class="post-body">
+              {% if post.data.reader_submitted %}
+              <div class="post-reader-badge">READER SUBMITTED</div>
+              {% endif %}
+              <h3 class="post-title">{{ post.data.title }}</h3>
+              <p class="post-teaser">{{ post.data.teaser }}</p>
+              <div class="post-footer">
+                <span class="post-meta">{{ post.date | readableDate }} · {{ post.data.read_time or '5' }} min read</span>
+                <span class="post-read-more">Read More</span>
+              </div>
+            </div>
+          </a>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="category-empty">
+          <p>No relationship chaos yet. Check back soon for documented confusion.</p>
+        </div>
+      {% endif %}
+    </div>
+  </section>
+
+  <div class="category-footer">
+    <a href="/" class="btn btn-secondary">← Back to Home</a>
+  </div>
+</div>
