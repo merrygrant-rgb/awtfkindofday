@@ -55,11 +55,11 @@ collections:
     slug: "{{slug}}"
     fields:
       - {label: "Product Name", name: "title", widget: "string"}
-      - {label: "Product Type", name: "type", widget: "select", options: ["Tee", "Hoodie", "Mug", "Tote", "Print", "Sticker Pack", "Other"]}
+      - {label: "Product Type", name: "type", widget: "select", options: ["Tee", "Hoodie", "Cap", "Mug", "Tote", "Print", "Sticker Pack", "Home & Comfort", "Other"]}
       - {label: "Price", name: "price", widget: "number"}
       - {label: "Slogan/Tagline", name: "slogan", widget: "string"}
       - {label: "Origin Story (2 sentences max)", name: "origin_story", widget: "text"}
-      - {label: "Related Post (slug)", name: "related_post", widget: "string", required: false}
+      - {label: "Related Post", name: "related_post", widget: "relation", collection: "posts", search_fields: ["title"], value_field: "title", display_fields: ["title"], required: false, hint: "Select the blog post that inspired this product"}
       - {label: "Product Images", name: "images", widget: "list", field: {label: "Image", name: "image", widget: "image"}}
       - {label: "Limited Edition", name: "limited_edition", widget: "boolean", default: false}
       - {label: "Badge Text", name: "badge", widget: "string", required: false}
