@@ -604,9 +604,13 @@ permalink: /
         
         <!-- Related Post Link -->
         {% if product.data.related_post %}
+        {% for post in collections.posts %}
+          {% if post.data.title == product.data.related_post %}
         <div class="merch-related">
-          <a href="/content/posts/{{ product.data.related_post }}">As seen in: {{ product.data.related_post | replace('-', ' ') | title }} →</a>
+          <a href="{{ post.url }}">As seen in: {{ product.data.related_post }} →</a>
         </div>
+          {% endif %}
+        {% endfor %}
         {% endif %}
         
         <!-- Price & Add to Cart -->
@@ -633,6 +637,11 @@ permalink: /
     {% endfor %}
   </div>
 </section>
+
+<!-- Hidden post data for modal lookup -->
+{% for post in collections.posts %}
+<div style="display:none;" data-post-title="{{ post.data.title }}" data-post-url="{{ post.url }}"></div>
+{% endfor %}
 
 <!-- Origin Story Modal -->
 <div id="origin-modal" class="origin-modal">
@@ -686,8 +695,16 @@ function openOriginModal(index) {
   const related = data.dataset.related;
   const relatedEl = document.getElementById('modal-related');
   if (related && related !== 'undefined' && related !== '') {
-    relatedEl.innerHTML = '<a href="/content/posts/' + related + '" class="origin-related-link">Read the post that inspired this →</a>';
-    relatedEl.style.display = 'block';
+    // Find the post URL by title
+    const posts = Array.from(document.querySelectorAll('[data-post-title]'));
+    const matchedPost = posts.find(p => p.dataset.postTitle === related);
+    
+    if (matchedPost) {
+      relatedEl.innerHTML = '<a href="' + matchedPost.dataset.postUrl + '" class="origin-related-link">Read the post that inspired this →</a>';
+      relatedEl.style.display = 'block';
+    } else {
+      relatedEl.style.display = 'none';
+    }
   } else {
     relatedEl.style.display = 'none';
   }
@@ -928,6 +945,7 @@ document.addEventListener('keydown', function(e) {
   }
 }
 </style>
+
 </section>
 
 <!-- ==================== ABOUT ==================== -->
