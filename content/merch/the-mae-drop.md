@@ -1,5 +1,5 @@
 ---
-title: "“Not Today, Bill.”  - The Limited Edition It is What it Is...Cap "
+title: "“Not Today, Bill.”  -  Limited Edition It is What it Is...Cap "
 type: Other
 price: 28
 slogan: The “Mae” was inspired by the wisest woman we know — the kind who
