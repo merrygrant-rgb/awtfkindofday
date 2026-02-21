@@ -9,7 +9,7 @@ slogan: The “Mae” was inspired by the wisest woman we know — the kind who
 origin_story: Some people panic. Some people escalate. Bill schedules a meeting
   about it. Mae adjusts her crown, takes a sip of coffee, and says, “It is what
   it is.”
-related_post: "Mae "
+related_post: Mae
 images:
   - /images/uploads/screenshot-2026-02-20-103319.png
 limited_edition: true
