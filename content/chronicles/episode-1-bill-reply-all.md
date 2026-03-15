@@ -1,3 +1,4 @@
+---
 episode_number: 1
 episode_title: Bill Discovers Reply All
 date: 2026-03-15
@@ -5,7 +6,6 @@ teaser: It was 9:02 AM on a Tuesday. Bill had just discovered the Reply All butt
 chaos_score: 9
 read_time: 8
 episode_url: /chronicles/episode1-bill-reply-all.html
-layout: false
-permalink: false
 eleventyExcludeFromCollections: false
+permalink: false
 ---
