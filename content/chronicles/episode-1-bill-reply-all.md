@@ -1,4 +1,3 @@
----
 episode_number: 1
 episode_title: Bill Discovers Reply All
 date: 2026-03-15
@@ -10,5 +9,3 @@ layout: false
 permalink: false
 eleventyExcludeFromCollections: false
 ---
-```
-
