@@ -6,4 +6,12 @@ teaser: It was 9:02 AM on a Tuesday. Bill had just discovered the Reply All butt
 chaos_score: 9
 read_time: 8
 episode_url: /chronicles/episode1-bill-reply-all.html
+layout: false
+permalink: false
+eleventyExcludeFromCollections: false
 ---
+```
+
+Commit both → Netlify rebuilds → then the HTML will be live at:
+```
+awtfkindofday.com/chronicles/episode1-bill-reply-all.html
