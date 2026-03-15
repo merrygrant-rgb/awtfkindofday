@@ -12,6 +12,3 @@ eleventyExcludeFromCollections: false
 ---
 ```
 
-Commit both → Netlify rebuilds → then the HTML will be live at:
-```
-awtfkindofday.com/chronicles/episode1-bill-reply-all.html
