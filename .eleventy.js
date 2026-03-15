@@ -6,6 +6,12 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("images");
   eleventyConfig.addPassthroughCopy("admin");
 
+  
+eleventyConfig.addPassthroughCopy({"content/chronicles/episode1-bill-reply-all.html": "chronicles/episode1-bill-reply-all.html"});
+
+
+
+
   // Date filter
   eleventyConfig.addFilter("readableDate", dateObj => {
     return new Date(dateObj).toLocaleDateString('en-US', {

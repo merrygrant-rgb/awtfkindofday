@@ -1,12 +1,14 @@
 ---
 episode_number: 1
 episode_title: Bill Discovers Reply All
-date: 2026-03-15T16:26:00.000-04:00
-teaser: It was 9:02 AM on a Tuesday. Bill had just discovered the Reply All
-  button. 47 people would never be the same.
-read_time: 5
+date: 2026-03-15
+teaser: It was 9:02 AM on a Tuesday. Bill had just discovered the Reply All button. 47 people would never be the same.
 chaos_score: 9
-reader_submitted: false
-layout: layouts/post.njk
+read_time: 8
+layout: layouts/base.njk
+permalink: /chronicles/episode-1-bill-reply-all/
 ---
-[imaginative-biscuit-4fec22.netlify.app](imaginative-biscuit-4fec22.netlify.app)
+
+<meta http-equiv="refresh" content="0; url=/chronicles/episode1-bill-reply-all.html">
+<script>window.location.href = '/chronicles/episode1-bill-reply-all.html';</script>
+<p>Redirecting to Episode 1...</p>
