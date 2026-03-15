@@ -8,3 +8,7 @@ read_time: 8
 layout: layouts/base.njk
 permalink: /chronicles/episode-1-bill-reply-all/
 ---
+
+<meta http-equiv="refresh" content="0; url=/chronicles/episode1-bill-reply-all.html">
+<script>window.location.href = '/chronicles/episode1-bill-reply-all.html';</script>
+<p>Redirecting to Episode 1...</p>
