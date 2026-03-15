@@ -7,7 +7,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("admin");
 
   
-  eleventyConfig.addPassthroughCopy({"content/chronicles": "chronicles"});
+eleventyConfig.addPassthroughCopy({"content/chronicles/episode1-bill-reply-all.html": "chronicles/episode1-bill-reply-all.html"});
 
 
 
