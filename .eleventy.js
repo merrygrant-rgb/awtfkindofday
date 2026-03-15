@@ -5,7 +5,9 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("js");
   eleventyConfig.addPassthroughCopy("images");
   eleventyConfig.addPassthroughCopy("admin");
-  eleventyConfig.addPassthroughCopy({"content/chronicles": "chronicles"});
+eleventyConfig.addPassthroughCopy({"content/chronicles": "chronicles"});
+```
+
 
   // Date filter
   eleventyConfig.addFilter("readableDate", dateObj => {
