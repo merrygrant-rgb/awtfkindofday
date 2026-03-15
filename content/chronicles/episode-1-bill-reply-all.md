@@ -6,6 +6,6 @@ teaser: It was 9:02 AM on a Tuesday. Bill had just discovered the Reply All butt
 chaos_score: 9
 read_time: 8
 episode_url: /chronicles/episode1-bill-reply-all.html
-eleventyExcludeFromCollections: false
-permalink: false
+permalink: /chronicles/episode-1-bill-reply-all/
+layout: chronicles-post
 ---
