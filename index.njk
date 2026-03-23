@@ -211,7 +211,7 @@ permalink: /
       <div class="chronicles-label">Weekly Series · Sundays</div>
       <h2 class="chronicles-title">The Group Chat Chronicles</h2>
       
-      {% set latestChronicle = collections.chronicles | limit(1) | first %}
+   {% set latestChronicle = collections.chronicles | reverse | first %}
       {% if latestChronicle %}
         <div class="chronicles-episode">Episode {{ latestChronicle.data.episode_number }}: {{ latestChronicle.data.episode_title }}</div>
         <p class="chronicles-tagline">"Every office has a Bill. Every survivor has a side chat."</p>
