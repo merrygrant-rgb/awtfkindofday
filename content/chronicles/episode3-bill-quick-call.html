@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Can You Stay On for a Quick Call? · Group Chat Chronicles · A WTF Kind of Day</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #f5f0e8;
+    --cream-dark: #ede7d9;
+    --gold: #c9a84c;
+    --gold-light: #e8d5a0;
+    --black: #1a1a1a;
+    --dark: #2d2d2d;
+    --muted: #8a8070;
+    --border: #d4cbbf;
+    --side-bg: #eef4ee;
+    --side-border: #c8ddc8;
+    --side-muted: #5a7a5a;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--cream); color: var(--black); font-family: 'DM Sans', sans-serif; min-height: 100vh; overflow-x: hidden; }
+
+  .progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: var(--gold); width: 0%; z-index: 200; transition: width 0.1s linear; }
+  .back-link { position: fixed; top: 1.25rem; left: 1.5rem; z-index: 100; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .back-link:hover { color: var(--black); }
+  .back-link::before { content: '← '; }
+
+  .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 4rem 2rem; border-bottom: 1px solid var(--border); }
+  .series-tag { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; animation: fadeUp 0.7s ease both; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 6.5rem); font-weight: 900; line-height: 1.0; letter-spacing: -0.02em; animation: fadeUp 0.7s 0.1s ease both; }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero-rule { width: 50px; height: 1px; background: var(--gold); margin: 1.75rem auto; animation: fadeUp 0.7s 0.2s ease both; }
+  .hero-intro { max-width: 500px; font-size: 1rem; line-height: 1.85; color: var(--muted); font-family: 'Playfair Display', serif; font-style: italic; animation: fadeUp 0.7s 0.3s ease both; }
+  .hero-intro strong { font-style: normal; color: var(--black); }
+  .scroll-cue { margin-top: 3rem; font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); display: flex; flex-direction: column; align-items: center; gap: 0.6rem; animation: fadeUp 0.7s 0.5s ease both; }
+  .scroll-arrow { width: 18px; height: 18px; border-right: 1.5px solid var(--gold); border-bottom: 1.5px solid var(--gold); transform: rotate(45deg); animation: bounce 1.5s infinite; }
+
+  .timeline { max-width: 700px; margin: 0 auto; padding: 4rem 1.5rem 6rem; }
+
+  .channel-header { display: flex; align-items: center; gap: 0.7rem; padding: 0.55rem 1rem; background: var(--black); color: #fff; border-radius: 5px 5px 0 0; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0; transform: translateY(10px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .channel-header.visible { opacity: 1; transform: translateY(0); }
+  .channel-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+  .channel-type { margin-left: auto; color: #888; font-size: 0.62rem; text-transform: none; letter-spacing: 0.03em; }
+
+  .chat-window { background: #fff; border: 1px solid var(--border); border-top: none; border-radius: 0 0 5px 5px; padding: 0.9rem 0; margin-bottom: 1.75rem; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+  .side-chat .channel-header { background: #2d4a2d; }
+  .side-chat .chat-window { background: var(--side-bg); border-color: var(--side-border); }
+  .side-chat .chat-window::before { content: '🔒 Side Chat · Management cannot see this'; display: block; font-size: 0.65rem; color: var(--side-muted); letter-spacing: 0.05em; text-align: center; padding: 0.45rem; border-bottom: 1px dashed var(--side-border); margin-bottom: 0.4rem; }
+
+  .private-chat .channel-header { background: #1a1a3a; }
+  .private-chat .chat-window { background: #f2f2fa; border-color: #c8c8e8; }
+  .private-chat .chat-window::before { content: '🔐 Private · Jess · Megan · Tyler · Alex'; display: block; font-size: 0.65rem; color: #5a5a8a; letter-spacing: 0.05em; text-align: center; padding: 0.45rem; border-bottom: 1px dashed #c8c8e8; margin-bottom: 0.4rem; }
+
+  .calendar-notif { background: #fff; border: 1px solid var(--border); border-left: 4px solid #1a73e8; border-radius: 0 5px 5px 0; padding: 0.85rem 1rem; margin: 0 0 1.75rem; box-shadow: 0 2px 10px rgba(0,0,0,0.06); opacity: 0; transform: translateY(10px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .calendar-notif.visible { opacity: 1; transform: translateY(0); }
+  .calendar-notif-header { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; }
+  .calendar-icon { font-size: 0.9rem; }
+  .calendar-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #1a73e8; }
+  .calendar-time { margin-left: auto; font-size: 0.65rem; color: var(--muted); }
+  .calendar-subject { font-weight: 700; font-size: 0.95rem; color: var(--black); margin-bottom: 0.35rem; }
+  .calendar-detail { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+  .calendar-detail span { color: var(--black); font-weight: 500; }
+  .calendar-warning { font-size: 0.78rem; color: #c0392b; font-weight: 600; margin-top: 0.4rem; }
+
+  .time-divider { display: flex; align-items: center; gap: 0.7rem; padding: 0.45rem 1rem; opacity: 0; transform: translateY(6px); transition: opacity 0.4s ease, transform 0.4s ease; }
+  .time-divider.visible { opacity: 1; transform: translateY(0); }
+  .time-divider-line { flex: 1; height: 1px; background: var(--border); }
+  .side-chat .time-divider-line { background: var(--side-border); }
+  .time-divider-label { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+
+  .msg { display: flex; gap: 0.7rem; padding: 0.28rem 1rem; opacity: 0; transform: translateY(10px); transition: opacity 0.4s ease, transform 0.4s ease; }
+  .msg.visible { opacity: 1; transform: translateY(0); }
+  .msg:hover { background: rgba(0,0,0,0.012); }
+  .avatar { width: 30px; height: 30px; border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.72rem; color: #fff; margin-top: 2px; }
+  .msg-body { flex: 1; }
+  .msg-meta { display: flex; align-items: baseline; gap: 0.45rem; margin-bottom: 0.12rem; }
+  .msg-name { font-weight: 600; font-size: 0.85rem; }
+  .msg-time { font-size: 0.65rem; color: var(--muted); }
+  .msg-badge { font-size: 0.58rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.08rem 0.35rem; border-radius: 2px; background: var(--cream-dark); color: var(--muted); }
+  .msg-text { font-size: 0.9rem; line-height: 1.65; color: var(--dark); }
+  .msg.cont { padding-top: 0.08rem; }
+  .msg.cont .avatar { visibility: hidden; }
+  .msg.cont .msg-meta { display: none; }
+
+  .reactions { display: flex; gap: 0.3rem; margin-top: 0.28rem; flex-wrap: wrap; }
+  .reaction { background: var(--cream); border: 1px solid var(--border); border-radius: 20px; padding: 0.1rem 0.45rem; font-size: 0.72rem; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; gap: 0.2rem; color: var(--muted); }
+  .reaction:hover { background: var(--cream-dark); }
+  .reaction.active { background: var(--gold-light); border-color: var(--gold); color: var(--dark); }
+  .side-chat .reaction { background: #e0ede0; border-color: var(--side-border); }
+  .side-chat .reaction.active { background: #c8ddc8; }
+  .private-chat .reaction { background: #e0e0f0; border-color: #c8c8e8; }
+
+  .narrator { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.98rem; line-height: 1.85; color: var(--muted); padding: 0.9rem 1rem 0.9rem 1.4rem; margin: 0.2rem 0 1.75rem; border-left: 2px solid var(--gold); opacity: 0; transform: translateY(8px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .narrator.visible { opacity: 1; transform: translateY(0); }
+  .narrator strong { font-style: normal; color: var(--black); }
+
+  .chaos-badge { display: inline-flex; align-items: center; background: var(--black); color: var(--gold); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.25rem 0.65rem; border-radius: 2px; margin: 0 1rem 0.65rem; opacity: 0; transform: translateY(6px); transition: opacity 0.4s ease, transform 0.4s ease; }
+  .chaos-badge.visible { opacity: 1; transform: translateY(0); }
+
+  .sys-notif { background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 0 5px 5px 0; padding: 0.85rem 1rem; margin: 0 0 1.75rem; box-shadow: 0 2px 10px rgba(0,0,0,0.06); opacity: 0; transform: translateY(10px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .sys-notif.visible { opacity: 1; transform: translateY(0); }
+  .sys-notif.warning { border-left-color: #c0392b; }
+  .sys-notif-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.3rem; }
+  .sys-notif-title { font-weight: 700; font-size: 0.95rem; color: var(--black); margin-bottom: 0.25rem; }
+  .sys-notif-detail { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+
+  .typing-indicator { display: flex; gap: 0.7rem; padding: 0.28rem 1rem; opacity: 0; transform: translateY(10px); transition: opacity 0.4s ease, transform 0.4s ease; align-items: center; }
+  .typing-indicator.visible { opacity: 1; transform: translateY(0); }
+  .typing-dots { display: flex; gap: 3px; margin-top: 2px; }
+  .typing-dots span { width: 5px; height: 5px; border-radius: 50%; background: var(--muted); animation: tdot 1.2s infinite; }
+  .typing-dots span:nth-child(2) { animation-delay: .2s; }
+  .typing-dots span:nth-child(3) { animation-delay: .4s; }
+  @keyframes tdot { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-4px)} }
+  .typing-label { font-size: 0.78rem; color: var(--muted); font-style: italic; }
+
+  .serial-badge { display: inline-block; background: rgba(192,57,43,0.1); border: 1px solid rgba(192,57,43,0.35); color: #c0392b; font-family: monospace; font-size: 0.82rem; font-weight: 700; padding: 0.05rem 0.4rem; border-radius: 3px; }
+
+  .episode-end { text-align: center; padding: 4rem 2rem; border-top: 1px solid var(--border); opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .episode-end.visible { opacity: 1; transform: translateY(0); }
+  .end-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem; }
+  .end-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem; }
+  .end-postscript { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.95rem; line-height: 1.9; color: var(--muted); max-width: 420px; margin: 0 auto 2.5rem; }
+  .end-postscript span { font-style: normal; font-weight: 700; color: var(--black); }
+  .next-btn { display: inline-block; background: var(--black); color: var(--cream); font-family: 'DM Sans', sans-serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.9rem 2rem; border-radius: 2px; border: none; cursor: pointer; transition: background 0.2s, transform 0.15s; margin-bottom: 1rem; text-decoration: none; }
+  .next-btn:hover { background: var(--dark); transform: translateY(-1px); }
+  .next-teaser { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.85rem; color: var(--muted); }
+  .next-box { margin-top: 2.5rem; padding: 1.5rem; border: 1px solid var(--border); border-radius: 4px; max-width: 420px; margin-left: auto; margin-right: auto; }
+  .next-box-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; }
+  .next-box-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--black); margin-bottom: 0.5rem; }
+  .next-box-teaser { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.9rem; color: var(--muted); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes bounce { 0%, 100% { transform: rotate(45deg) translateY(0); } 50% { transform: rotate(45deg) translateY(5px); } }
+  @keyframes pulse { from { opacity: 0.4; } to { opacity: 1; } }
+
+  @media (max-width: 600px) {
+    .msg { padding: 0.22rem 0.75rem; }
+    .avatar { width: 26px; height: 26px; font-size: 0.65rem; }
+    .back-link { font-size: 0.62rem; }
+  }
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progress"></div>
+<a href="https://awtfkindofday.com" class="back-link">A WTF Kind of Day</a>
+
+<section class="hero">
+  <p class="series-tag">Group Chat Chronicles · Episode 3</p>
+  <h1>Can You Stay On for<br><em>"a Quick Call?"</em></h1>
+  <div class="hero-rule"></div>
+  <div class="hero-intro">There are phrases in corporate life that sound harmless.<br>Polite. Casual. Almost considerate.<br><br><strong>This is not one of them.</strong></div>
+  <p style="font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-top:1rem;animation:fadeUp 0.7s 0.4s ease both;">Chaos Score: 8/10 · Casualties: Everyone</p>
+  <div class="scroll-cue">
+    <span>Scroll to witness</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+<div class="timeline">
+<div class="channel-header reveal" data-delay="0" ><div class="channel-dot" ></div><span># general-team</span><span class="channel-type" >2:47 PM</span></div>
+<div class="chat-window">
+<div class="msg reveal" data-delay="200"><div class="avatar" style="background:#c0392b;">B</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#c0392b">Bill</span><span class="msg-time">2:47 PM</span></div><div class="msg-text">Hey quick question before everyone logs off.</div></div></div>
+</div>
+<div class="side-chat">
+<div class="channel-header reveal" data-delay="0" style="background:#2d4a2d;"><div class="channel-dot" ></div><span>🔒 jess · megan · tyler</span><span class="channel-type" >2:47 PM</span></div>
+<div class="chat-window">
+<div class="msg reveal" data-delay="100"><div class="avatar" style="background:#1e6b3a;">J</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#1e6b3a">Jess</span><span class="msg-time">2:47 PM</span></div><div class="msg-text">no 😐</div></div></div>
+<div class="msg reveal" data-delay="280"><div class="avatar" style="background:#b7470a;">M</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#b7470a">Megan</span><span class="msg-time">2:47 PM</span></div><div class="msg-text">I don't like the word 'quick' 😭</div></div></div>
+<div class="msg reveal" data-delay="460"><div class="avatar" style="background:#0e6b8a;">T</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#0e6b8a">Tyler</span><span class="msg-time">2:47 PM</span></div><div class="msg-text">nothing good has ever followed that word 💀</div></div></div>
+</div>
+</div>
+<div class="channel-header reveal" data-delay="0" ><div class="channel-dot" ></div><span># general-team</span><span class="channel-type" >2:48 PM</span></div>
+<div class="chat-window">
+<div class="msg reveal" data-delay="100"><div class="avatar" style="background:#c0392b;">B</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#c0392b">Bill</span><span class="msg-time">2:48 PM</span></div><div class="msg-text">Can a few of you stay on for a quick call?</div></div></div>
+</div>
+<div class="calendar-notif reveal" data-delay="0" style="border-left-color:#1a73e8;">
+  <div class="calendar-notif-header">
+    <span class="calendar-icon">📅</span>
+    <span class="calendar-label" style="color:#1a73e8;">Calendar Notification</span>
+    <span class="calendar-time">2:48 PM</span>
+  </div>
+  0
+</div>
+<div class="side-chat">
+<div class="channel-header reveal" data-delay="0" style="background:#2d4a2d;"><div class="channel-dot" ></div><span>🔒 jess · megan · tyler</span><span class="channel-type" >2:49 PM</span></div>
+<div class="chat-window">
+<div class="msg reveal" data-delay="100"><div class="avatar" style="background:#1e6b3a;">J</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#1e6b3a">Jess</span><span class="msg-time">2:49 PM</span></div><div class="msg-text">EIGHTEEN??? 😳</div></div></div>
+<div class="msg reveal" data-delay="280"><div class="avatar" style="background:#b7470a;">M</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#b7470a">Megan</span><span class="msg-time">2:49 PM</span></div><div class="msg-text">that is not 'a few' 😭😭</div></div></div>
+<div class="msg reveal" data-delay="460"><div class="avatar" style="background:#0e6b8a;">T</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#0e6b8a">Tyler</span><span class="msg-time">2:49 PM</span></div><div class="msg-text">that's a population 💀</div></div></div>
+</div>
+</div>
+<div class="channel-header reveal" data-delay="0" ><div class="channel-dot" ></div><span># general-team</span><span class="channel-type" >2:51–2:54 PM — Call Begins</span></div>
+<div class="chat-window">
+<div class="msg reveal" data-delay="100"><div class="avatar" style="background:#c0392b;">B</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#c0392b">Bill</span><span class="msg-time">2:51 PM</span></div><div class="msg-text">Thanks everyone for hopping on. This should be quick.</div></div></div>
+<div class="msg reveal" data-delay="400"><div class="avatar" style="background:#c0392b;">B</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#c0392b">Bill</span><span class="msg-time">2:53 PM</span></div><div class="msg-text">So I was thinking about our alignment meeting earlier—</div></div></div>
+<div class="msg reveal" data-delay="800"><div class="avatar" style="background:#c0392b;">B</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#c0392b">Bill</span><span class="msg-time">2:54 PM</span></div><div class="msg-text">What if we had smaller alignment meetings to prepare for the bigger alignment meeting?</div></div></div>
+</div>
+<div class="side-chat">
+<div class="channel-header reveal" data-delay="0" style="background:#2d4a2d;"><div class="channel-dot" ></div><span>🔒 jess · megan · tyler</span><span class="channel-type" >2:51 PM</span></div>
+<div class="chat-window">
+<div class="msg reveal" data-delay="100"><div class="avatar" style="background:#1e6b3a;">J</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#1e6b3a">Jess</span><span class="msg-time">2:51 PM</span></div><div class="msg-text">no one hopped 😐</div></div></div>
+<div class="msg reveal" data-delay="280"><div class="avatar" style="background:#b7470a;">M</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#b7470a">Megan</span><span class="msg-time">2:51 PM</span></div><div class="msg-text">we were dragged 😭</div></div></div>
+<div class="msg reveal" data-delay="460"><div class="avatar" style="background:#0e6b8a;">T</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#0e6b8a">Tyler</span><span class="msg-time">2:51 PM</span></div><div class="msg-text">this was not voluntary 💀</div></div></div>
+<div class="msg reveal" data-delay="640"><div class="avatar" style="background:#1e6b3a;">J</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#1e6b3a">Jess</span><span class="msg-time">2:53 PM</span></div><div class="msg-text">no 😐</div></div></div>
+<div class="msg reveal" data-delay="820"><div class="avatar" style="background:#b7470a;">M</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#b7470a">Megan</span><span class="msg-time">2:53 PM</span></div><div class="msg-text">NOT THE ALIGNMENT 😭</div></div></div>
+<div class="msg reveal" data-delay="1000"><div class="avatar" style="background:#0e6b8a;">T</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#0e6b8a">Tyler</span><span class="msg-time">2:53 PM</span></div><div class="msg-text">he's building on it 💀</div></div></div>
+<div class="msg reveal" data-delay="1180"><div class="avatar" style="background:#1e6b3a;">J</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#1e6b3a">Jess</span><span class="msg-time">2:54 PM</span></div><div class="msg-text">I'm done 😐</div></div></div>
+<div class="msg reveal" data-delay="1360"><div class="avatar" style="background:#b7470a;">M</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#b7470a">Megan</span><span class="msg-time">2:54 PM</span></div><div class="msg-text">this is meeting inception 😭😭</div></div></div>
+<div class="msg reveal" data-delay="1540"><div class="avatar" style="background:#0e6b8a;">T</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#0e6b8a">Tyler</span><span class="msg-time">2:54 PM</span></div><div class="msg-text">we have entered a loop 💀</div><div class="reactions"><div class="reaction" onclick="toggleReaction(this)">💀 <span>12</span></div><div class="reaction" onclick="toggleReaction(this)">😭 <span>9</span></div></div></div></div>
+</div>
+</div>
+<div class="channel-header reveal" data-delay="0" ><div class="channel-dot" ></div><span># general-team</span><span class="channel-type" >2:55–2:59 PM</span></div>
+<div class="chat-window">
+<div class="msg reveal" data-delay="100"><div class="avatar" style="background:#1a5276;">M</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#1a5276">Mark</span><span class="msg-time">2:55 PM</span></div><div class="msg-text">Bill, that may complicate the workflow.</div></div></div>
+<div class="msg reveal" data-delay="400"><div class="avatar" style="background:#c0392b;">B</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#c0392b">Bill</span><span class="msg-time">2:56 PM</span></div><div class="msg-text">I hear you. But what if it simplifies it?</div></div></div>
+<div class="msg reveal" data-delay="700"><div class="avatar" style="background:#1a5276;">A</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#1a5276">Amanda</span><span class="msg-time">2:58 PM</span><span class="msg-badge">Finance</span></div><div class="msg-text">Is there a budget impact for the additional meetings?</div></div></div>
+<div class="msg reveal" data-delay="1100"><div class="avatar" style="background:#c0392b;">B</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#c0392b">Bill</span><span class="msg-time">2:59 PM</span></div><div class="msg-text">It's just time.</div></div></div>
+</div>
+<div class="side-chat">
+<div class="channel-header reveal" data-delay="0" style="background:#2d4a2d;"><div class="channel-dot" ></div><span>🔒 jess · megan · tyler</span><span class="channel-type" >2:55–2:59 PM</span></div>
+<div class="chat-window">
+<div class="msg reveal" data-delay="100"><div class="avatar" style="background:#1e6b3a;">J</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#1e6b3a">Jess</span><span class="msg-time">2:55 PM</span></div><div class="msg-text">Mark is trying to keep us alive 😐</div></div></div>
+<div class="msg reveal" data-delay="280"><div class="avatar" style="background:#b7470a;">M</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#b7470a">Megan</span><span class="msg-time">2:55 PM</span></div><div class="msg-text">he's trying 😭</div></div></div>
+<div class="msg reveal" data-delay="460"><div class="avatar" style="background:#0e6b8a;">T</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#0e6b8a">Tyler</span><span class="msg-time">2:55 PM</span></div><div class="msg-text">he will fail 💀</div></div></div>
+<div class="msg reveal" data-delay="640"><div class="avatar" style="background:#1e6b3a;">J</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#1e6b3a">Jess</span><span class="msg-time">2:58 PM</span></div><div class="msg-text">oh no 😐</div></div></div>
+<div class="msg reveal" data-delay="820"><div class="avatar" style="background:#b7470a;">M</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#b7470a">Megan</span><span class="msg-time">2:58 PM</span></div><div class="msg-text">Amanda has spoken 😭</div></div></div>
+<div class="msg reveal" data-delay="1000"><div class="avatar" style="background:#0e6b8a;">T</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#0e6b8a">Tyler</span><span class="msg-time">2:58 PM</span></div><div class="msg-text">it's over 💀</div></div></div>
+<div class="msg reveal" data-delay="1200"><div class="avatar" style="background:#1e6b3a;">J</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#1e6b3a">Jess</span><span class="msg-time">2:59 PM</span></div><div class="msg-text">TIME IS MONEY 😐</div></div></div>
+<div class="msg reveal" data-delay="1380"><div class="avatar" style="background:#b7470a;">M</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#b7470a">Megan</span><span class="msg-time">2:59 PM</span></div><div class="msg-text">AMANDA KNOWS 😭😭</div></div></div>
+<div class="msg reveal" data-delay="1560"><div class="avatar" style="background:#0e6b8a;">T</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#0e6b8a">Tyler</span><span class="msg-time">2:59 PM</span></div><div class="msg-text">he has triggered finance 💀</div></div></div>
+</div>
+</div>
+<div class="channel-header reveal" data-delay="0" ><div class="channel-dot" ></div><span># general-team</span><span class="channel-type" >3:01–3:05 PM</span></div>
+<div class="chat-window">
+<div class="msg reveal" data-delay="100"><div class="avatar" style="background:#6b3fa0;">K</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#6b3fa0">Karen</span><span class="msg-time">3:01 PM</span><span class="msg-badge">HR</span></div><div class="msg-text">Perhaps we can keep this high-level and define next steps.</div></div></div>
+<div class="msg reveal" data-delay="500"><div class="avatar" style="background:#c0392b;">B</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#c0392b">Bill</span><span class="msg-time">3:03 PM</span></div><div class="msg-text">Quick thought—</div></div></div>
+<div class="msg reveal" data-delay="900"><div class="avatar" style="background:#c0392b;">B</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#c0392b">Bill</span><span class="msg-time">3:04 PM</span></div><div class="msg-text">We might need a follow-up call to finalize this.</div></div></div>
+</div>
+<div class="side-chat">
+<div class="channel-header reveal" data-delay="0" style="background:#2d4a2d;"><div class="channel-dot" ></div><span>🔒 jess · megan · tyler</span><span class="channel-type" >3:01–3:05 PM</span></div>
+<div class="chat-window">
+<div class="msg reveal" data-delay="100"><div class="avatar" style="background:#1e6b3a;">J</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#1e6b3a">Jess</span><span class="msg-time">3:01 PM</span></div><div class="msg-text">Karen is trying to land the plane 😐</div></div></div>
+<div class="msg reveal" data-delay="280"><div class="avatar" style="background:#b7470a;">M</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#b7470a">Megan</span><span class="msg-time">3:01 PM</span></div><div class="msg-text">there is no runway 😭</div></div></div>
+<div class="msg reveal" data-delay="460"><div class="avatar" style="background:#0e6b8a;">T</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#0e6b8a">Tyler</span><span class="msg-time">3:01 PM</span></div><div class="msg-text">we are in the ocean 💀</div></div></div>
+<div class="msg reveal" data-delay="640"><div class="avatar" style="background:#1e6b3a;">J</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#1e6b3a">Jess</span><span class="msg-time">3:04 PM</span></div><div class="msg-text">HE DID IT 😳</div></div></div>
+<div class="msg reveal" data-delay="820"><div class="avatar" style="background:#b7470a;">M</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#b7470a">Megan</span><span class="msg-time">3:04 PM</span></div><div class="msg-text">HE MADE ANOTHER ONE 😭😭😭</div></div></div>
+<div class="msg reveal" data-delay="1000"><div class="avatar" style="background:#0e6b8a;">T</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#0e6b8a">Tyler</span><span class="msg-time">3:04 PM</span></div><div class="msg-text">they're multiplying 💀</div><div class="reactions"><div class="reaction" onclick="toggleReaction(this)">💀 <span>12</span></div><div class="reaction" onclick="toggleReaction(this)">😭 <span>9</span></div></div></div></div>
+</div>
+</div>
+<div class="channel-header reveal" data-delay="0" style="background:#1a1a1a;"><div class="channel-dot" ></div><span># general-team</span><span class="channel-type" style="color:var(--gold);">3:05 PM</span></div>
+<div class="chat-window">
+<div class="sys-notif reveal" data-delay="100"><div class="sys-notif-label">📞 Call Notification · 3:05 PM</div><div class="sys-notif-title">The VP has joined the call.</div></div>
+<div class="msg reveal" data-delay="300"><div class="avatar" style="background:#8a6a00;">VP</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#8a6a00">Vp</span><span class="msg-time">3:06 PM</span></div><div class="msg-text">Just hopping in for a minute.</div></div></div>
+<div class="msg reveal" data-delay="600"><div class="avatar" style="background:#8a6a00;">VP</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#8a6a00">Vp</span><span class="msg-time">3:07 PM</span></div><div class="msg-text">Have we considered taking a step back and rethinking the entire approach?</div></div></div>
+<div class="msg reveal" data-delay="1000"><div class="avatar" style="background:#8a6a00;">VP</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#8a6a00">Vp</span><span class="msg-time">3:08 PM</span></div><div class="msg-text">Anyway, I'll let you all run with that.</div></div></div>
+</div>
+<div class="side-chat">
+<div class="channel-header reveal" data-delay="0" style="background:#2d4a2d;"><div class="channel-dot" ></div><span>🔒 jess · megan · tyler</span><span class="channel-type" >3:05–3:08 PM</span></div>
+<div class="chat-window">
+<div class="msg reveal" data-delay="100"><div class="avatar" style="background:#1e6b3a;">J</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#1e6b3a">Jess</span><span class="msg-time">3:05 PM</span></div><div class="msg-text">oh no 😐</div></div></div>
+<div class="msg reveal" data-delay="280"><div class="avatar" style="background:#b7470a;">M</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#b7470a">Megan</span><span class="msg-time">3:05 PM</span></div><div class="msg-text">NOT THE VP 😭</div></div></div>
+<div class="msg reveal" data-delay="460"><div class="avatar" style="background:#0e6b8a;">T</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#0e6b8a">Tyler</span><span class="msg-time">3:05 PM</span></div><div class="msg-text">we are doomed 💀</div></div></div>
+<div class="msg reveal" data-delay="640"><div class="avatar" style="background:#1e6b3a;">J</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#1e6b3a">Jess</span><span class="msg-time">3:07 PM</span></div><div class="msg-text">there it is 😐</div></div></div>
+<div class="msg reveal" data-delay="820"><div class="avatar" style="background:#b7470a;">M</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#b7470a">Megan</span><span class="msg-time">3:07 PM</span></div><div class="msg-text">we just lost everything 😭</div></div></div>
+<div class="msg reveal" data-delay="1000"><div class="avatar" style="background:#0e6b8a;">T</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#0e6b8a">Tyler</span><span class="msg-time">3:07 PM</span></div><div class="msg-text">drive-by damage 💀</div><div class="reactions"><div class="reaction" onclick="toggleReaction(this)">💀 <span>21</span></div><div class="reaction" onclick="toggleReaction(this)">😭 <span>18</span></div><div class="reaction" onclick="toggleReaction(this)">😳 <span>14</span></div></div></div></div>
+<div class="msg reveal" data-delay="1180"><div class="avatar" style="background:#1e6b3a;">J</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#1e6b3a">Jess</span><span class="msg-time">3:08 PM</span></div><div class="msg-text">HE LEFT 😐</div></div></div>
+<div class="msg reveal" data-delay="1360"><div class="avatar" style="background:#b7470a;">M</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#b7470a">Megan</span><span class="msg-time">3:08 PM</span></div><div class="msg-text">HE LEFT US WITH THAT 😭</div></div></div>
+<div class="msg reveal" data-delay="1540"><div class="avatar" style="background:#0e6b8a;">T</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#0e6b8a">Tyler</span><span class="msg-time">3:08 PM</span></div><div class="msg-text">reset the timeline 💀</div></div></div>
+</div>
+</div>
+<div class="channel-header reveal" data-delay="0" ><div class="channel-dot" ></div><span># general-team</span><span class="channel-type" >3:10–3:18 PM</span></div>
+<div class="chat-window">
+<div class="msg reveal" data-delay="100"><div class="avatar" style="background:#8e1a5e;">J</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#8e1a5e">Jeff</span><span class="msg-time">3:10 PM</span><span class="msg-badge">Legal ⚖️</span></div><div class="msg-text">Why am I on this call?</div></div></div>
+<div class="msg reveal" data-delay="400"><div class="avatar" style="background:#5a5a5a;">L</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#5a5a5a">Lohan</span><span class="msg-time">3:17 PM</span></div><div class="msg-text">👍</div></div></div>
+<div class="msg reveal" data-delay="700"><div class="avatar" style="background:#c0392b;">B</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#c0392b">Bill</span><span class="msg-time">3:18 PM</span></div><div class="msg-text">Great discussion everyone.</div></div></div>
+</div>
+<div class="side-chat">
+<div class="channel-header reveal" data-delay="0" style="background:#2d4a2d;"><div class="channel-dot" ></div><span>🔒 jess · megan · tyler</span><span class="channel-type" >3:10–3:19 PM</span></div>
+<div class="chat-window">
+<div class="msg reveal" data-delay="100"><div class="avatar" style="background:#1e6b3a;">J</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#1e6b3a">Jess</span><span class="msg-time">3:10 PM</span></div><div class="msg-text">third time 😐</div></div></div>
+<div class="msg reveal" data-delay="280"><div class="avatar" style="background:#b7470a;">M</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#b7470a">Megan</span><span class="msg-time">3:10 PM</span></div><div class="msg-text">I can't do this again 😭😭</div></div></div>
+<div class="msg reveal" data-delay="460"><div class="avatar" style="background:#0e6b8a;">T</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#0e6b8a">Tyler</span><span class="msg-time">3:10 PM</span></div><div class="msg-text">Jeff is trapped 💀</div></div></div>
+<div class="msg reveal" data-delay="640"><div class="avatar" style="background:#1e6b3a;">J</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#1e6b3a">Jess</span><span class="msg-time">3:17 PM</span></div><div class="msg-text">he just got here 😐</div></div></div>
+<div class="msg reveal" data-delay="820"><div class="avatar" style="background:#b7470a;">M</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#b7470a">Megan</span><span class="msg-time">3:17 PM</span></div><div class="msg-text">SEVENTEEN MINUTES LATE 😭</div></div></div>
+<div class="msg reveal" data-delay="1000"><div class="avatar" style="background:#0e6b8a;">T</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#0e6b8a">Tyler</span><span class="msg-time">3:17 PM</span></div><div class="msg-text">and contributed exactly nothing 💀</div></div></div>
+<div class="msg reveal" data-delay="1300"><div class="avatar" style="background:#1a6b1a;">A</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#1a6b1a">Alex</span><span class="msg-time">3:19 PM</span></div><div class="msg-text">I sent him the brief at 9. Two follow-ups. One Teams message.</div></div></div>
+<div class="msg reveal" data-delay="1500"><div class="avatar" style="background:#1e6b3a;">J</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#1e6b3a">Jess</span><span class="msg-time">3:19 PM</span></div><div class="msg-text">and? 😐</div></div></div>
+<div class="msg reveal" data-delay="1700"><div class="avatar" style="background:#1a6b1a;">A</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#1a6b1a">Alex</span><span class="msg-time">3:19 PM</span></div><div class="msg-text">He handled it.</div></div></div>
+<div class="msg reveal" data-delay="1900"><div class="avatar" style="background:#b7470a;">M</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#b7470a">Megan</span><span class="msg-time">3:19 PM</span></div><div class="msg-text">WHAT 😭</div></div></div>
+<div class="msg reveal" data-delay="2100"><div class="avatar" style="background:#1a6b1a;">A</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#1a6b1a">Alex</span><span class="msg-time">3:19 PM</span></div><div class="msg-text">I did it at 2.</div></div></div>
+<div class="msg reveal" data-delay="2300"><div class="avatar" style="background:#0e6b8a;">T</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#0e6b8a">Tyler</span><span class="msg-time">3:19 PM</span></div><div class="msg-text">so the 👍 was confirmation of nothing 💀</div></div></div>
+<div class="msg reveal" data-delay="2500"><div class="avatar" style="background:#1a6b1a;">A</div><div class="msg-body"><div class="msg-meta"><span class="msg-name" style="color:#1a6b1a">Alex</span><span class="msg-time">3:19 PM</span></div><div class="msg-text">correct.</div><div class="reactions"><div class="reaction" onclick="toggleReaction(this)">💀 <span>34</span></div><div class="reaction" onclick="toggleReaction(this)">😭 <span>28</span></div><div class="reaction" onclick="toggleReaction(this)">🫡 <span>19</span></div></div></div></div>
+</div>
+</div>
+</div>
+<div class="timeline" style="padding-top:0;">
+<div class="episode-end reveal" data-delay="0">
+  
+  <p class="end-label">End of Episode 3</p>
+  <h2 class="end-title">A WTF Kind of Day.</h2>
+  <p class="end-postscript">The call lasted 28 minutes. Nothing was decided.<br><span>The follow-up meeting has already been scheduled.</span> It conflicts with the original alignment meeting.<br>Jeff from Legal still doesn't know why he was there.<br><span>Lohan joined at 3:17 PM.</span> He contributed a thumbs up. Alex had already solved it at 2.</p>
+  <div class="next-box">
+    <p class="next-box-label">Next Episode</p>
+    <p class="next-box-title">Episode 4: <em style="color:var(--gold);">The Team Building Debacle</em></p>
+    <p class="next-box-teaser">Bill has a suggestion for the 3-day weekend. It involves tents. Lohan is in charge of equipment.</p>
+  </div>
+</div>
+</div>
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      setTimeout(() => el.classList.add('visible'), parseInt(el.dataset.delay || 0));
+      observer.unobserve(el);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+reveals.forEach(el => observer.observe(el));
+
+window.addEventListener('scroll', () => {
+  document.getElementById('progress').style.width =
+    Math.min((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100, 100) + '%';
+});
+
+function toggleReaction(el) {
+  const num = el.querySelector('span');
+  const count = parseInt(num.textContent);
+  num.textContent = el.classList.toggle('active') ? count + 1 : count - 1;
+}
+</script>
+</body>
+</html>
