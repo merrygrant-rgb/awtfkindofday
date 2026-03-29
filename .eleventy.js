@@ -9,7 +9,7 @@ module.exports = function(eleventyConfig) {
   
 eleventyConfig.addPassthroughCopy({"content/chronicles/episode1-bill-reply-all.html": "chronicles/episode1-bill-reply-all.html"});
 eleventyConfig.addPassthroughCopy({"content/chronicles/episode2-bill-schedule-meeting.html": "chronicles/episode2-bill-schedule-meeting.html"});
-
+eleventyConfig.addPassthroughCopy({"content/chronicles/episode3-bill-quick-call.html": "chronicles/episode3-bill-quick-call.html"});
 
 
 
