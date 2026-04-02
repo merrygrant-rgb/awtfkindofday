@@ -19,7 +19,7 @@ description: A semi-fictional study of corporate survival through group texts, p
         <p>New episodes every Sunday. Start at the beginning. Trust us.</p>
       </div>
       
-      {% set firstEpisode = collections.chronicles | reverse | first %}
+      {% set firstEpisode = collections.chronicles | first %}
       {% if firstEpisode %}
       <a href="{{ firstEpisode.url }}" class="btn btn-primary chronicles-archive-cta">Start at Episode 1 →</a>
       {% endif %}
